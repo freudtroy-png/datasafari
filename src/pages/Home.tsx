@@ -57,8 +57,8 @@ export function Home() {
     <>
       {/* HERO */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)' }}>
-          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 30% 40%, #fff 0%, transparent 50%), radial-gradient(circle at 70% 60%, #01db5d 0%, transparent 50%)' }} />
+        <div className="absolute inset-0">
+          <img src="/assets/hero/hero-bg.svg" alt="" className="w-full h-full object-cover" />
         </div>
         <div className="wrap relative z-10 pt-32 pb-20 text-center max-w-[720px]">
           <motion.div {...fadeUp}>
@@ -172,11 +172,17 @@ export function Home() {
 
           <motion.div {...fadeUp} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5">
             {filtered.map((d) => (
-              <Card key={d.code} className="p-3 flex items-center gap-2.5 cursor-pointer hover:border-ds-green/30 hover:bg-ds-wash transition-all">
-                <span className="text-2xl shrink-0 w-10 text-center">{'🌍'}</span>
-                <div className="min-w-0 flex-1">
-                  <div className="text-sm font-semibold text-ds-ink">{d.name}</div>
-                  <div className="text-xs text-ds-muted">{d.speed} &middot; {d.price}</div>
+              <Card key={d.code} className="overflow-hidden cursor-pointer group hover:border-ds-green/30 transition-all p-0">
+                <div className="aspect-[4/3] overflow-hidden relative">
+                  <img src={d.img} alt={d.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ds-ink/60 to-transparent" />
+                  <span className="absolute bottom-2.5 left-3 text-xs font-bold text-white drop-shadow-sm" style={{ textShadow: '0 1px 3px rgba(0,0,0,.5)' }}>
+                    {d.name}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between px-3 py-2">
+                  <span className="text-[11px] text-ds-muted font-medium">{d.speed}</span>
+                  <span className="text-[11px] text-ds-green font-bold">{d.price}</span>
                 </div>
               </Card>
             ))}

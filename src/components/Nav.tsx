@@ -36,7 +36,7 @@ export function Nav() {
       >
         <div className="wrap flex items-center gap-8">
           <Link to="/" className="flex items-center h-[34px] shrink-0">
-            <img src="/assets/icons/datasafari-logo.png" alt="DataSafari" className="h-full w-auto" />
+            <img src="/assets/icons/datasafari-logo.svg" alt="DataSafari" className="h-full w-auto" />
           </Link>
           <div className="hidden md:flex items-center gap-6 ml-4">
             {links.map((link) => (

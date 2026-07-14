@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Globe, Shield, CreditCard } from 'lucide-react'
+import { Shield, CreditCard } from 'lucide-react'
 
 const sections = [
   {
@@ -31,10 +31,10 @@ const sections = [
 ]
 
 const socials = [
-  { label: 'Instagram', icon: null },
-  { label: 'Facebook', icon: null },
-  { label: 'Twitter', icon: null },
-  { label: 'LinkedIn', icon: null },
+  { label: 'Instagram', icon: 'M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm0 2h10c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3zm1.5 6a3.5 3.5 0 1 0 7 0 3.5 3.5 0 0 0-7 0zM12 9a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm4.5-.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z' },
+  { label: 'Facebook', icon: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z' },
+  { label: 'Twitter', icon: 'M18.2 2.2h3.3l-7.2 8.3 8.5 11.2h-6.6l-4.7-6.2-5.4 6.2H2.7l7.8-8.8L1.3 2.2h6.8l4.3 5.6zm-1.2 17.5h1.8L7.1 4.1H5.1z' },
+  { label: 'LinkedIn', icon: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z' },
 ]
 
 export function Footer() {
@@ -43,7 +43,7 @@ export function Footer() {
       <div className="wrap py-16">
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1.2fr] gap-12 pb-10 border-b border-white/6">
           <div>
-            <img src="/assets/icons/datasafari-logo.png" alt="DataSafari" className="h-7 mb-3.5" />
+            <img src="/assets/icons/datasafari-logo.svg" alt="DataSafari" className="h-7 mb-3.5" />
             <p className="text-sm text-white/50 leading-relaxed max-w-xs mb-5">
               Global eSIM connectivity for modern travellers. Fast, affordable data in 200+ countries.
             </p>
@@ -55,7 +55,9 @@ export function Footer() {
                   className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:border-ds-green hover:text-ds-green hover:bg-ds-green/10 transition-all"
                   aria-label={s.label}
                 >
-                  <Globe size={14} />
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                    <path d={s.icon} />
+                  </svg>
                 </a>
               ))}
             </div>
