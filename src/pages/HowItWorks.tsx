@@ -119,10 +119,10 @@ export function HowItWorks() {
         </div>
       </section>
 
-      {/* ─── VISUAL TIMELINE: 3 STEPS ─── */}
-      <section className="py-24 md:py-32 bg-white overflow-hidden">
+      {/* ─── 3 STEPS ─── */}
+      <section className="py-24 md:py-32 bg-ds-wash">
         <div className="wrap">
-          <motion.div {...fadeUp()} className="text-center max-w-[600px] mx-auto mb-20">
+          <motion.div {...fadeUp()} className="text-center max-w-[600px] mx-auto mb-16">
             <Badge><Zap size={13} /> How it works</Badge>
             <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-ds-ink leading-[1.12] mt-3 mb-3">
               Three steps, zero hassle.
@@ -130,52 +130,26 @@ export function HowItWorks() {
             <p className="text-ds-muted leading-relaxed">From purchase to connection in minutes. No physical SIM, no paperwork, no waiting in line.</p>
           </motion.div>
 
-          <div className="relative max-w-[900px] mx-auto">
-            <div className="absolute left-[31px] md:left-1/2 top-0 bottom-0 w-[2px] bg-ds-line hidden md:block" />
-            <motion.div
-              className="absolute left-[31px] md:left-1/2 top-0 w-[2px] bg-ds-green hidden md:block"
-              initial={{ height: 0 }}
-              whileInView={{ height: '100%' }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.5, ease }}
-            />
-
-            {steps.map((step, i) => {
-              const isLeft = i % 2 === 0
-              return (
-                <motion.div
-                  key={step.num}
-                  className={`relative flex items-start gap-6 md:gap-12 mb-16 last:mb-0 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 0.6, ease, delay: i * 0.15 }}
-                >
-                  <div className="relative z-10 shrink-0">
-                    <motion.div
-                      className="w-16 h-16 rounded-full bg-white border-2 border-ds-green flex items-center justify-center shadow-lg shadow-ds-green/10"
-                      whileInView={{ scale: [0.8, 1.05, 1] }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.15 + 0.3 }}
-                    >
-                      <step.icon size={24} className="text-ds-green" />
-                    </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-[1000px] mx-auto">
+            {steps.map((step, i) => (
+              <motion.div
+                key={step.num}
+                className="flex flex-col items-center text-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.5, ease, delay: i * 0.12 }}
+              >
+                <div className="flex flex-col items-center mb-5">
+                  <span className="text-[clamp(48px,5vw,72px)] font-extrabold text-ds-green/20 leading-none select-none">{step.num}</span>
+                  <div className="w-14 h-14 rounded-full bg-white shadow-lg shadow-ds-green/10 flex items-center justify-center -mt-9">
+                    <step.icon size={24} className="text-ds-green" />
                   </div>
-
-                  <div className={`flex-1 max-w-[380px] ${isLeft ? 'md:text-right' : 'md:text-left'}`}>
-                    <motion.div
-                      whileInView={{ x: [isLeft ? -20 : 20, 0] }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, ease, delay: i * 0.15 + 0.2 }}
-                    >
-                      <span className="text-[11px] font-extrabold tracking-[2px] text-ds-green uppercase mb-2 block">{step.num}</span>
-                      <h3 className="text-xl font-bold text-ds-ink mb-3">{step.title}</h3>
-                      <p className="text-sm text-ds-muted leading-relaxed">{step.desc}</p>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              )
-            })}
+                </div>
+                <h3 className="text-lg font-bold text-ds-ink mb-2">{step.title}</h3>
+                <p className="text-sm text-ds-muted leading-relaxed max-w-[280px]">{step.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
