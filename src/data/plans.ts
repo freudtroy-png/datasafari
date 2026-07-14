@@ -2,78 +2,38 @@ export interface Plan {
   id: string
   name: string
   tagline: string
-  price: number
-  period: string
-  periodDays: number
-  data: string
-  features: string[]
   popular?: boolean
   badge?: string
-  img: string
+  weekly: { data: string; price: number; validity: string; barPct: number }
+  monthly: { data: string; price: number; validity: string; barPct: number }
+  features: string[]
 }
 
 export const plans: Plan[] = [
   {
     id: 'light',
     name: 'Light',
-    tagline: 'Perfect for short trips',
-    price: 4.99,
-    period: '7 days',
-    periodDays: 7,
-    data: '1 GB',
-    features: ['1 GB data', '4G/5G speeds', 'Instant activation', 'No physical SIM'],
-    img: '/assets/destinations/japan.jpg',
+    tagline: 'Essential data for short stops',
+    weekly: { data: '1', price: 4.99, validity: 'Valid for 7 days', barPct: 20 },
+    monthly: { data: '5', price: 9.99, validity: 'Valid for 30 days', barPct: 25 },
+    features: ['200+ countries', 'Instant activation', 'Email support'],
   },
   {
     id: 'standard',
     name: 'Standard',
-    tagline: 'Best for regular travellers',
-    price: 12.99,
-    period: '30 days',
-    periodDays: 30,
-    data: '5 GB',
-    features: ['5 GB data', '4G/5G speeds', 'Instant activation', 'No physical SIM', 'Top-up anytime'],
+    tagline: 'Best value for most travellers',
     popular: true,
     badge: 'Most popular',
-    img: '/assets/destinations/singapore.jpg',
+    weekly: { data: '5', price: 12.99, validity: 'Valid for 7 days', barPct: 55 },
+    monthly: { data: '15', price: 24.99, validity: 'Valid for 30 days', barPct: 50 },
+    features: ['200+ countries', '5G ready', 'Priority support'],
   },
   {
     id: 'unlimited',
     name: 'Unlimited',
-    tagline: 'For heavy data users',
-    price: 22.99,
-    period: '30 days',
-    periodDays: 30,
-    data: 'Unlimited',
-    features: ['Unlimited data', '4G/5G speeds (Fair use 30 GB)', 'Instant activation', 'No physical SIM', 'Top-up anytime'],
-    img: '/assets/destinations/italy.jpg',
-  },
-]
-
-export interface PlanType {
-  name: string
-  desc: string
-  price: string
-  features: string[]
-}
-
-export const planTypes: PlanType[] = [
-  {
-    name: 'Single Destination',
-    desc: 'One country, one price',
-    price: 'from $3',
-    features: ['190+ countries available', '7-30 day validity', 'Local 4G/5G networks'],
-  },
-  {
-    name: 'Multi-Country',
-    desc: 'Travel across regions',
-    price: 'from $9',
-    features: ['Regional coverage', 'Up to 50 countries', 'Shared data pool'],
-  },
-  {
-    name: 'Worldwide',
-    desc: 'Global coverage',
-    price: 'from $19',
-    features: ['200+ countries', 'Single eSIM', 'Best value per GB'],
+    tagline: 'Heavy data, zero worries',
+    weekly: { data: '10', price: 22.99, validity: 'Valid for 7 days', barPct: 100 },
+    monthly: { data: '\u221e', price: 39.99, validity: 'Valid for 30 days', barPct: 100 },
+    features: ['200+ countries', '5G ready', '24/7 support'],
   },
 ]

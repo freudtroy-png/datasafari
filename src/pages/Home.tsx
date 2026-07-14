@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Search, Wifi, Zap, Shield, Globe, HeadphonesIcon, ThumbsUp, Star, Download, CheckCircle2, Leaf, ArrowRight, HelpCircle } from 'lucide-react'
+import { Search, Wifi, Zap, Shield, Globe, HeadphonesIcon, ThumbsUp, Star, Download, Leaf, ArrowRight, HelpCircle, Signal, Tag, Clock } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -27,19 +27,27 @@ const features = [
 ]
 
 const testimonials = [
-  { name: 'Priya S.', role: 'Frequent traveller', text: 'Game changer for my quarterly Asia trips. Installed at the gate, connected on landing. No SIM hunting.', img: '/assets/testimonials/person1.jpg', rating: 5 },
-  { name: 'Michael A.', role: 'Digital nomad', text: 'Been using DataSafari across 12 countries this year. Speeds are consistently good, support is fast.', img: '/assets/testimonials/person4.jpg', rating: 5 },
-  { name: 'David K.', role: 'Business consultant', text: 'Dual SIM is clutch. I keep my work number live while using DataSafari data abroad. Seamless.', img: '/assets/testimonials/person6.jpg', rating: 5 },
-  { name: 'Sophie R.', role: 'Backpacker', text: 'The 30-day unlimited plan got me through Southeast Asia without a single top-up. Incredible value.', img: '/assets/testimonials/person5.jpg', rating: 5 },
-  { name: 'James O.', role: 'Pilot', text: 'Coverage in over 190 countries means I rarely need to think about connectivity. It just works.', img: '/assets/testimonials/person2.jpg', rating: 5 },
-  { name: 'Aisha W.', role: 'Student abroad', text: 'Cheaper than my home country plan. Installing took 2 minutes in the airport lounge before my flight.', img: '/assets/testimonials/person3.jpg', rating: 5 },
+  { name: 'Priya S.', role: 'Frequent traveller', text: 'Southeast Asia for a month, Singapore to rural Thailand. Never once thought about data.' },
+  { name: 'Michael A.', role: 'Consultant', text: 'Support walked me through setup at midnight. Now it\'s the first thing I buy before every business trip.' },
+  { name: 'David K.', role: 'Business traveller', text: 'The only eSIM that reliably works on African networks. Travel to Lagos every quarter — nothing else compares.' },
+  { name: 'Sophie R.', role: 'Digital nomad', text: 'Honeymoon across four continents, one eSIM, activated once. From Bali to Buenos Aires without a single hiccup.' },
+  { name: 'James O.', role: 'Backpacker', text: 'Eight countries in two weeks, one plan, zero issues. Seamless from Tokyo to Bangkok.' },
+  { name: 'Aisha W.', role: 'Travel blogger', text: '45 seconds to install, instant activation on landing. Best travel purchase I made all year.' },
 ]
+
+const avatarColors = ['#01db5d', '#f59e0b', '#3b82f6', '#ec4899', '#8b5cf6', '#14b8a6']
+
+function getInitials(name: string) {
+  return name.split(' ').map(n => n[0]).join('')
+}
 
 export function Home() {
   const [searchQuery, setSearchQuery] = useState('')
   const [activeRegion, setActiveRegion] = useState('All')
   const [openFaq, setOpenFaq] = useState<number | null>(null)
-  const [planToggle, setPlanToggle] = useState<'7' | '30'>('7')
+  const [planToggle, setPlanToggle] = useState<'weekly' | 'monthly'>('weekly')
+
+  const activePlan = planToggle === 'weekly' ? 'weekly' : 'monthly'
 
   const filtered = destinations.filter(
     (d) => activeRegion === 'All' || d.name.toLowerCase().includes(activeRegion.toLowerCase())
@@ -49,9 +57,8 @@ export function Home() {
     <>
       {/* HERO */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img src="/assets/hero/plane-hero.jpg" alt="" className="w-full h-full object-cover brightness-[0.4]" />
-          <div className="absolute inset-0 bg-gradient-to-br from-ds-ink/75 via-ds-ink/40 to-transparent" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)' }}>
+          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 30% 40%, #fff 0%, transparent 50%), radial-gradient(circle at 70% 60%, #01db5d 0%, transparent 50%)' }} />
         </div>
         <div className="wrap relative z-10 pt-32 pb-20 text-center max-w-[720px]">
           <motion.div {...fadeUp}>
@@ -233,120 +240,188 @@ export function Home() {
         </div>
       </section>
 
-      {/* PLANS */}
-      <section id="plans" className="py-20 md:py-24 bg-white">
-        <div className="wrap">
-          <motion.div {...fadeUp} className="text-center max-w-[640px] mx-auto mb-10">
-            <Badge><Zap size={13} /> Simple pricing</Badge>
-            <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-ds-ink leading-[1.12] mt-3 mb-3">
-              Plans that fit your trip.
+      {/* PLANS — restored to original HTML look */}
+      <section id="plans" className="py-20 md:py-24 overflow-hidden" style={{ background: '#0f172a' }}>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full pointer-events-none opacity-[0.05]" style={{ background: 'radial-gradient(circle, #01db5d 0%, transparent 65%)' }} />
+        <div className="wrap relative z-10">
+          <motion.div {...fadeUp} className="text-center max-w-[640px] mx-auto mb-8">
+            <Badge variant="invert"><Tag size={13} /> Plans</Badge>
+            <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-white leading-[1.12] mt-3 mb-3">
+              Data plans for every journey.
             </h2>
-            <p className="text-ds-muted leading-relaxed">No contracts. No hidden fees. Cancel anytime.</p>
+            <p className="text-white/40 leading-relaxed">Short trip or long stay — there is a plan that fits the way you travel.</p>
           </motion.div>
 
-          <motion.div {...fadeUp} className="flex justify-center mb-8">
-            <div className="inline-flex bg-ds-wash rounded-full p-1 relative">
+          {/* Toggle */}
+          <motion.div {...fadeUp} className="flex justify-center mb-10">
+            <div className="inline-flex relative border border-white/[0.08] rounded-full p-[4px]" style={{ background: 'rgba(255,255,255,.06)' }}>
               <div
-                className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-white shadow-sm transition-transform duration-300 ease-[cubic-bezier(.34,1.56,.64,1)]"
-                style={{ transform: planToggle === '30' ? 'translateX(100%)' : 'translateX(0)' }}
+                className="absolute top-[4px] bottom-[4px] rounded-full bg-white transition-all duration-300 ease-[cubic-bezier(.34,1.56,.64,1)] z-0"
+                style={{
+                  width: 'calc(50% - 4px)',
+                  transform: planToggle === 'monthly' ? 'translateX(100%)' : 'translateX(0)',
+                }}
               />
-              {(['7', '30'] as const).map((d) => (
+              {(['weekly', 'monthly'] as const).map((t) => (
                 <button
-                  key={d}
-                  onClick={() => setPlanToggle(d)}
+                  key={t}
+                  onClick={() => setPlanToggle(t)}
                   className={`px-7 py-2.5 rounded-full text-sm font-semibold relative z-10 transition-colors ${
-                    planToggle === d ? 'text-ds-ink' : 'text-ds-muted'
+                    planToggle === t ? 'text-ds-ink' : 'text-white/40'
                   }`}
                 >
-                  {d}-day plans
+                  {t === 'weekly' ? '7-day plans' : '30-day plans'}
                 </button>
               ))}
             </div>
           </motion.div>
 
-          <motion.div {...fadeUp} className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-[900px] mx-auto">
-            {plans.map((plan) => (
-              <Card key={plan.id} className={`relative overflow-hidden ${plan.popular ? 'border-ds-green shadow-[0_0_0_1px_#01db5d,0_4px_20px_rgba(15,23,42,.08)]' : ''}`}>
-                {plan.popular && (
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-ds-green text-ds-ink text-[11px] font-bold px-4 py-1 rounded-b-r z-10">
-                    Most popular
+          {/* Cards */}
+          <motion.div {...fadeUp} className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-[900px] mx-auto">
+            {plans.map((plan) => {
+              const p = plan[activePlan]
+              return (
+                <div
+                  key={plan.id}
+                  className={`relative flex flex-col rounded-[20px] p-7 pt-8 transition-all duration-250 ${
+                    plan.popular
+                      ? 'bg-ds-green border-ds-green shadow-[0_20px_60px_rgba(1,219,93,.25)]'
+                      : 'border border-white/[0.08] hover:border-white/[0.16] hover:shadow-[0_12px_40px_rgba(0,0,0,.3)]'
+                  }`}
+                  style={plan.popular ? {} : { background: 'rgba(255,255,255,.04)' }}
+                >
+                  {/* Badge */}
+                  {plan.popular && (
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white text-ds-ink text-[10px] font-extrabold tracking-[0.8px] uppercase px-3.5 py-[5px] rounded-full whitespace-nowrap border border-white">
+                      {plan.badge}
+                    </div>
+                  )}
+
+                  <div className={`text-lg font-bold mb-0.5 ${plan.popular ? 'text-ds-ink' : 'text-white'}`}>{plan.name}</div>
+                  <div className={`text-xs mb-6 ${plan.popular ? 'text-black/50' : 'text-white/40'}`}>{plan.tagline}</div>
+
+                  {/* Data amount */}
+                  <div className={`text-[52px] font-extrabold tracking-tighter leading-none mb-1 ${plan.popular ? 'text-ds-ink' : 'text-white'}`}>
+                    {p.data}
+                    <span className="text-xl font-semibold tracking-normal"> GB</span>
                   </div>
-                )}
-                <div className="h-[100px] overflow-hidden bg-ds-wash relative">
-                  <img src={plan.img} alt="" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ds-ink/50 to-transparent" />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-base font-bold text-ds-ink">{plan.name}</h3>
-                  <p className="text-xs text-ds-muted mb-1">{plan.tagline}</p>
-                  <div className="flex items-baseline gap-1 mb-1">
-                    <span className="text-3xl font-extrabold text-ds-ink tracking-tight">${plan.price}</span>
-                    <span className="text-sm text-ds-muted font-medium">USD</span>
+
+                  {/* Data bar */}
+                  <div className={`h-[4px] rounded-full my-3 mb-5 overflow-hidden ${plan.popular ? 'bg-black/[0.12]' : 'bg-white/[0.12]'}`}>
+                    <div className="h-full rounded-full transition-all duration-600" style={{ width: `${p.barPct}%`, background: plan.popular ? 'rgba(0,0,0,.3)' : 'rgba(255,255,255,.4)' }} />
                   </div>
-                  <p className="text-xs text-ds-muted mb-4">{plan.data} &middot; {plan.period}</p>
-                  <ul className="space-y-2 mb-5">
+
+                  {/* Price row */}
+                  <div className="flex items-baseline gap-1 mb-0.5">
+                    <span className={`text-[30px] font-extrabold tracking-tight ${plan.popular ? 'text-ds-ink' : 'text-white'}`}>
+                      ${p.price}
+                    </span>
+                    <span className={`text-xs font-medium ${plan.popular ? 'text-black/45' : 'text-white/40'}`}>/ plan</span>
+                  </div>
+                  <div className={`text-xs mb-6 ${plan.popular ? 'text-black/40' : 'text-white/30'}`}>{p.validity}</div>
+
+                  {/* CTA */}
+                  <a
+                    href="#"
+                    className={`block text-center py-3 px-5 rounded-r2 text-sm font-bold transition-all mb-6 ${
+                      plan.popular
+                        ? 'bg-ds-ink text-white hover:bg-[#0a1a2e]'
+                        : 'bg-white/[0.1] border border-white/[0.12] text-white hover:bg-white/[0.16]'
+                    }`}
+                  >
+                    Get started
+                  </a>
+
+                  {/* Features */}
+                  <div className="flex flex-col gap-2.5 mt-auto">
                     {plan.features.map((f) => (
-                      <li key={f} className="flex items-center gap-2 text-xs text-ds-body">
-                        <CheckCircle2 size={14} className="text-ds-green shrink-0" />
+                      <div key={f} className={`flex items-center gap-2 text-xs font-medium ${plan.popular ? 'text-black/65' : 'text-white/60'}`}>
+                        <div className={`w-[18px] h-[18px] rounded-full flex items-center justify-center shrink-0 ${plan.popular ? 'bg-black/[0.12]' : 'bg-white/[0.1]'}`}>
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={plan.popular ? 'text-black/60' : 'text-white/70'}>
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                        </div>
                         {f}
-                      </li>
+                      </div>
                     ))}
-                  </ul>
-                  <Button variant={plan.popular ? 'primary' : 'outline'} className="w-full">
-                    Get {plan.name}
-                  </Button>
+                  </div>
                 </div>
-              </Card>
+              )
+            })}
+          </motion.div>
+
+          {/* Trust strip */}
+          <motion.div {...fadeUp} className="flex items-center justify-center gap-7 mt-8 flex-wrap">
+            {[
+              { icon: Shield, text: 'Money-back guarantee' },
+              { icon: Zap, text: 'Instant QR delivery' },
+              { icon: Clock, text: 'No contract, cancel anytime' },
+              { icon: HeadphonesIcon, text: '24/7 support' },
+            ].map((item) => (
+              <div key={item.text} className="flex items-center gap-[7px] text-xs text-white/30 font-medium">
+                <item.icon size={13} className="text-white/30" />
+                {item.text}
+              </div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section id="reviews" className="py-20 md:py-24 bg-ds-wash">
+      {/* TESTIMONIALS — restored to original HTML look */}
+      <section id="reviews" className="py-20 md:py-24 bg-white">
         <div className="wrap">
-          <motion.div {...fadeUp} className="text-center max-w-[640px] mx-auto mb-10">
-            <Badge><Star size={13} /> 4.9 on Trustpilot</Badge>
+          <motion.div {...fadeUp} className="text-center max-w-[640px] mx-auto mb-12">
+            <Badge><Signal size={13} /> Trusted by travellers</Badge>
             <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-ds-ink leading-[1.12] mt-3 mb-3">
-              Loved by travellers.
+              See what all<br />the talk is about.
             </h2>
+            <p className="text-ds-muted leading-relaxed">Real travellers, real connections. From backpackers to business flyers.</p>
           </motion.div>
-          <motion.div {...fadeUp} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {testimonials.map((t) => (
-              <Card key={t.name} className="p-5 hover:border-ds-green/30 hover:shadow-md hover:-translate-y-0.5 transition-all">
-                <div className="flex items-center gap-3 mb-3.5">
-                  <div className="w-11 h-11 rounded-full overflow-hidden bg-ds-wash shrink-0">
-                    <img src={t.img} alt="" className="w-full h-full object-cover" />
+
+          <motion.div {...fadeUp} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+            {testimonials.map((t, i) => (
+              <div
+                key={t.name}
+                className="border border-ds-line rounded-[20px] overflow-hidden bg-white flex flex-col h-full transition-all duration-250 hover:shadow-[0_10px_36px_rgba(15,23,42,.1)] hover:-translate-y-[3px]"
+              >
+                {/* Photo area (4:3 ratio) */}
+                <div className="w-full aspect-[4/3] overflow-hidden shrink-0 relative bg-ds-wash flex items-center justify-center">
+                  <div
+                    className="w-full h-full flex items-center justify-center text-white font-extrabold text-[40px] tracking-tight"
+                    style={{ background: `linear-gradient(135deg, ${avatarColors[i % avatarColors.length]}, ${avatarColors[(i + 2) % avatarColors.length]})` }}
+                  >
+                    {getInitials(t.name)}
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-sm font-semibold text-ds-ink">{t.name}</div>
-                    <div className="text-xs text-ds-muted">{t.role}</div>
-                  </div>
-                  <div className="flex gap-0.5 text-ds-green shrink-0">
-                    {Array.from({ length: t.rating }).map((_, j) => (
-                      <Star key={j} size={12} />
-                    ))}
+                  {/* Gradient fade overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 h-[60px]" style={{ background: 'linear-gradient(0deg, #fff 0%, transparent 100%)' }} />
+                </div>
+
+                {/* Body */}
+                <div className="p-[18px_22px_22px] flex flex-col flex-1">
+                  <span className="text-[36px] leading-none text-ds-ink font-serif mb-2.5 block opacity-80">&ldquo;</span>
+                  <p className="text-sm text-ds-ink font-medium leading-relaxed flex-1 mb-4">{t.text}</p>
+                  <div className="text-xs text-ds-muted font-medium border-t border-ds-line pt-3">
+                    &mdash; <strong className="text-ds-ink">{t.name}</strong>, {t.role}
                   </div>
                 </div>
-                <p className="text-sm text-ds-body leading-relaxed">"{t.text}"</p>
-              </Card>
+              </div>
             ))}
           </motion.div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="py-20 md:py-24 bg-white">
+      <section id="faq" className="py-20 md:py-24 bg-ds-wash">
         <div className="wrap max-w-[700px]">
           <motion.div {...fadeUp} className="text-center mb-10">
-            <Badge><HelpCircle size={13} /> FAQ</Badge>
+            <Badge><HelpCircle size={13} /> Got questions?</Badge>
             <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-ds-ink leading-[1.12] mt-3 mb-3">
-              Got questions?
+              Everything you need to know.
             </h2>
           </motion.div>
           <motion.div {...fadeUp} className="space-y-2.5">
             {faqData.slice(0, 4).map((item, i) => (
-              <div key={i} className="border border-ds-line rounded-r2 overflow-hidden hover:border-ds-green/30 transition-colors">
+              <div key={i} className="bg-white border border-ds-line rounded-r2 overflow-hidden hover:border-ds-green/30 transition-colors">
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   className="w-full flex items-center justify-between gap-4 px-5 py-[18px] text-left text-sm font-semibold text-ds-ink hover:text-ds-green-dark transition-colors"
