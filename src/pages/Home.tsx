@@ -27,19 +27,14 @@ const features = [
 ]
 
 const testimonials = [
-  { name: 'Priya S.', role: 'Frequent traveller', text: 'Southeast Asia for a month, Singapore to rural Thailand. Never once thought about data.' },
-  { name: 'Michael A.', role: 'Consultant', text: 'Support walked me through setup at midnight. Now it\'s the first thing I buy before every business trip.' },
-  { name: 'David K.', role: 'Business traveller', text: 'The only eSIM that reliably works on African networks. Travel to Lagos every quarter — nothing else compares.' },
-  { name: 'Sophie R.', role: 'Digital nomad', text: 'Honeymoon across four continents, one eSIM, activated once. From Bali to Buenos Aires without a single hiccup.' },
-  { name: 'James O.', role: 'Backpacker', text: 'Eight countries in two weeks, one plan, zero issues. Seamless from Tokyo to Bangkok.' },
-  { name: 'Aisha W.', role: 'Travel blogger', text: '45 seconds to install, instant activation on landing. Best travel purchase I made all year.' },
+  { name: 'Priya S.', role: 'Frequent traveller', text: 'Southeast Asia for a month, Singapore to rural Thailand. Never once thought about data.', img: '/assets/testimonials/person1.jpg' },
+  { name: 'Michael A.', role: 'Consultant', text: 'Support walked me through setup at midnight. Now it\'s the first thing I buy before every business trip.', img: '/assets/testimonials/person2.jpg' },
+  { name: 'David K.', role: 'Business traveller', text: 'The only eSIM that reliably works on African networks. Travel to Lagos every quarter — nothing else compares.', img: '/assets/testimonials/person3.jpg' },
+  { name: 'Sophie R.', role: 'Digital nomad', text: 'Honeymoon across four continents, one eSIM, activated once. From Bali to Buenos Aires without a single hiccup.', img: '/assets/testimonials/person4.jpg' },
+  { name: 'James O.', role: 'Backpacker', text: 'Eight countries in two weeks, one plan, zero issues. Seamless from Tokyo to Bangkok.', img: '/assets/testimonials/person5.jpg' },
+  { name: 'Aisha W.', role: 'Travel blogger', text: '45 seconds to install, instant activation on landing. Best travel purchase I made all year.', img: '/assets/testimonials/person6.jpg' },
 ]
 
-const avatarColors = ['#01db5d', '#f59e0b', '#3b82f6', '#ec4899', '#8b5cf6', '#14b8a6']
-
-function getInitials(name: string) {
-  return name.split(' ').map(n => n[0]).join('')
-}
 
 export function Home() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -58,7 +53,7 @@ export function Home() {
       {/* HERO */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src="/assets/hero/hero-bg.svg" alt="" className="w-full h-full object-cover" />
+          <img src="/assets/hero/plane-hero.jpg" alt="" className="w-full h-full object-cover brightness-[0.35]" />
         </div>
         <div className="wrap relative z-10 pt-32 pb-20 text-center max-w-[720px]">
           <motion.div {...fadeUp}>
@@ -309,7 +304,7 @@ export function Home() {
                   {/* Data amount */}
                   <div className={`text-[52px] font-extrabold tracking-tighter leading-none mb-1 ${plan.popular ? 'text-ds-ink' : 'text-white'}`}>
                     {p.data}
-                    <span className="text-xl font-semibold tracking-normal"> GB</span>
+                    {p.data !== '\u221e' && <span className="text-xl font-semibold tracking-normal"> GB</span>}
                   </div>
 
                   {/* Data bar */}
@@ -385,21 +380,15 @@ export function Home() {
           </motion.div>
 
           <motion.div {...fadeUp} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
-            {testimonials.map((t, i) => (
+            {testimonials.map((t) => (
               <div
                 key={t.name}
-                className="border border-ds-line rounded-[20px] overflow-hidden bg-white flex flex-col h-full transition-all duration-250 hover:shadow-[0_10px_36px_rgba(15,23,42,.1)] hover:-translate-y-[3px]"
+                className="border border-ds-line rounded-[20px] overflow-hidden bg-white flex flex-col h-full transition-all duration-250 hover:shadow-[0_10px_36px_rgba(15,23,42,.1)] hover:-translate-y-[3px] group"
               >
                 {/* Photo area (4:3 ratio) */}
-                <div className="w-full aspect-[4/3] overflow-hidden shrink-0 relative bg-ds-wash flex items-center justify-center">
-                  <div
-                    className="w-full h-full flex items-center justify-center text-white font-extrabold text-[40px] tracking-tight"
-                    style={{ background: `linear-gradient(135deg, ${avatarColors[i % avatarColors.length]}, ${avatarColors[(i + 2) % avatarColors.length]})` }}
-                  >
-                    {getInitials(t.name)}
-                  </div>
-                  {/* Gradient fade overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 h-[60px]" style={{ background: 'linear-gradient(0deg, #fff 0%, transparent 100%)' }} />
+                <div className="w-full aspect-[4/3] overflow-hidden shrink-0 relative bg-ds-wash">
+                  <img src={t.img} alt={t.name} className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(0deg, #fff 0%, transparent 40%)' }} />
                 </div>
 
                 {/* Body */}

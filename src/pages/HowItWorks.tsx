@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react'
-import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Search, Smartphone, Globe, QrCode, Wifi, CheckCircle2, ArrowRight, Shield, Zap, Clock, RefreshCw } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -8,99 +8,6 @@ const ease = [0.16, 1, 0.3, 1] as const
 
 function fadeUp(delay = 0) {
   return { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: '-80px' as const }, transition: { duration: 0.6, ease, delay } }
-}
-
-/* --- Inline SVG illustrations --- */
-
-function PhoneSVG({ className = '', animating = false }: { className?: string; animating?: boolean }) {
-  return (
-    <svg className={className} viewBox="0 0 120 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="4" width="100" height="232" rx="16" stroke="currentColor" strokeWidth="2" fill="none" />
-      <rect x="14" y="8" width="92" height="200" rx="4" fill="currentColor" fillOpacity="0.06" />
-      <rect x="45" y="217" width="30" height="4" rx="2" fill="currentColor" fillOpacity="0.3" />
-      <circle cx="60" cy="12" r="3" fill="currentColor" fillOpacity="0.2" />
-      <g opacity={animating ? '0.8' : '0.3'}>
-        <rect x="24" y="30" width="72" height="10" rx="2" fill="currentColor" fillOpacity="0.08" />
-        <rect x="24" y="46" width="72" height="10" rx="2" fill="currentColor" fillOpacity="0.05" />
-        <motion.rect
-          x="24" y="66" width="72" height="80" rx="6"
-          fill="#01db5d" fillOpacity="0.12"
-          animate={animating ? { scale: [1, 1.02, 1] } : undefined}
-          transition={{ duration: 2, repeat: Infinity, ease }}
-        />
-      </g>
-      {animating && (
-        <>
-          <motion.rect x="30" y="72" width="60" height="6" rx="3" fill="#01db5d" fillOpacity="0.4" initial={{ width: 0 }} animate={{ width: 60 }} transition={{ duration: 1.5, repeat: Infinity, ease }} />
-          <motion.rect x="30" y="84" width="40" height="6" rx="3" fill="#01db5d" fillOpacity="0.5" initial={{ width: 0 }} animate={{ width: 40 }} transition={{ duration: 1.5, delay: 0.3, repeat: Infinity, ease }} />
-          <motion.rect x="30" y="96" width="50" height="6" rx="3" fill="#01db5d" fillOpacity="0.3" initial={{ width: 0 }} animate={{ width: 50 }} transition={{ duration: 1.5, delay: 0.6, repeat: Infinity, ease }} />
-          <motion.rect x="30" y="108" width="35" height="6" rx="3" fill="#01db5d" fillOpacity="0.6" initial={{ width: 0 }} animate={{ width: 35 }} transition={{ duration: 1.5, delay: 0.9, repeat: Infinity, ease }} />
-        </>
-      )}
-    </svg>
-  )
-}
-
-function QRIcon({ className = '' }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" strokeWidth="2" fill="none" />
-      <rect x="4" y="4" width="16" height="16" rx="1" fill="currentColor" fillOpacity="0.06" />
-      <rect x="7" y="7" width="6" height="6" rx="1" fill="currentColor" fillOpacity="0.3" />
-      <rect x="16" y="7" width="3" height="3" rx="0.5" fill="currentColor" fillOpacity="0.3" />
-      <rect x="7" y="16" width="3" height="3" rx="0.5" fill="currentColor" fillOpacity="0.3" />
-      <rect x="26" y="2" width="20" height="20" rx="3" stroke="currentColor" strokeWidth="2" fill="none" />
-      <rect x="28" y="4" width="16" height="16" rx="1" fill="currentColor" fillOpacity="0.06" />
-      <rect x="31" y="7" width="10" height="10" rx="1" fill="currentColor" fillOpacity="0.3" />
-      <rect x="2" y="26" width="20" height="20" rx="3" stroke="currentColor" strokeWidth="2" fill="none" />
-      <rect x="4" y="28" width="16" height="16" rx="1" fill="currentColor" fillOpacity="0.06" />
-      <rect x="7" y="31" width="6" height="6" rx="1" fill="currentColor" fillOpacity="0.3" />
-      <rect x="16" y="31" width="3" height="3" rx="0.5" fill="currentColor" fillOpacity="0.3" />
-      <rect x="16" y="40" width="3" height="3" rx="0.5" fill="currentColor" fillOpacity="0.3" />
-      <rect x="26" y="26" width="10" height="10" rx="1" fill="currentColor" fillOpacity="0.3" />
-      <rect x="38" y="26" width="8" height="8" rx="1" fill="currentColor" fillOpacity="0.2" />
-      <rect x="26" y="38" width="8" height="8" rx="1" fill="currentColor" fillOpacity="0.2" />
-      <rect x="38" y="38" width="8" height="8" rx="1" fill="currentColor" fillOpacity="0.3" />
-      <motion.rect x="40" y="40" width="4" height="4" rx="0.5" fill="#01db5d" animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 2, repeat: Infinity }} />
-    </svg>
-  )
-}
-
-function GlobeIllustration({ className = '' }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="60" cy="60" r="48" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.2" />
-      <ellipse cx="60" cy="60" rx="20" ry="48" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.15" />
-      <line x1="60" y1="12" x2="60" y2="108" stroke="currentColor" strokeWidth="1.5" opacity="0.15" />
-      <line x1="12" y1="60" x2="108" y2="60" stroke="currentColor" strokeWidth="1.5" opacity="0.15" />
-      <circle cx="60" cy="60" r="48" stroke="#01db5d" strokeWidth="0.5" fill="none" opacity="0.3" strokeDasharray="4 4" />
-      <circle cx="60" cy="60" r="32" stroke="#01db5d" strokeWidth="0.5" fill="none" opacity="0.2" strokeDasharray="3 3" />
-      {/* Continents */}
-      <path d="M44 40 Q48 36 55 38 Q58 40 56 44 Q54 48 48 48 Q44 46 44 40Z" fill="#01db5d" fillOpacity="0.5" />
-      <path d="M68 52 Q74 50 78 54 Q80 58 76 62 Q72 64 68 60 Q66 56 68 52Z" fill="#01db5d" fillOpacity="0.4" />
-      <path d="M52 68 Q56 66 60 68 Q62 72 58 76 Q54 78 52 74 Q50 72 52 68Z" fill="#01db5d" fillOpacity="0.35" />
-      {/* Pulse ring */}
-      <motion.circle cx="60" cy="60" r="48" stroke="#01db5d" strokeWidth="1" fill="none" initial={{ r: 48, opacity: 0.5 }} animate={{ r: 58, opacity: 0 }} transition={{ duration: 2.5, repeat: Infinity, ease }} />
-    </svg>
-  )
-}
-
-function SignalBars({ className = '' }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 60 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {[24, 30, 36, 42, 48].map((h, i) => (
-        <motion.rect
-          key={i}
-          x={i * 13} y={48 - h}
-          width="8" height={h}
-          rx="3" fill="#01db5d"
-          fillOpacity={0.2 + i * 0.18}
-          animate={{ fillOpacity: [0.2 + i * 0.18, 0.4 + i * 0.2, 0.2 + i * 0.18] }}
-          transition={{ duration: 1.5, delay: i * 0.2, repeat: Infinity }}
-        />
-      ))}
-    </svg>
-  )
 }
 
 /* --- Data --- */
@@ -118,35 +25,15 @@ const devices = [
   { name: 'iPad', models: 'Air (4th+), Pro (2018+), mini (6th+)', color: '#a2aaad' },
 ]
 
-const comparison = [
-  { feature: 'Physical SIM card', esim: 'No card needed', sim: 'Plastic card required' },
-  { feature: 'Activation time', esim: 'Under 3 minutes', sim: 'Days to deliver' },
-  { feature: 'Switch provider', esim: 'Instant, in-app', sim: 'Need new card' },
-  { feature: 'Multiple lines', esim: '8+ eSIMs per device', sim: 'Dual SIM max' },
-  { feature: 'Lost phone', esim: 'Cannot be removed', sim: 'Card can be stolen' },
-  { feature: 'Environmental impact', esim: 'Zero plastic waste', sim: 'Plastic + shipping' },
-  { feature: 'Pre-trip setup', esim: 'Buy & install anytime', sim: 'Must have card before' },
-  { feature: 'Coverage switching', esim: 'Download new plan', sim: 'Buy new card per country' },
-]
-
 const steps = [
-  { num: '01', title: 'Pick your plan', desc: 'Choose from 200+ destinations and the data you need. Checkout in seconds, no account required.', icon: Globe },
-  { num: '02', title: 'Install your eSIM', desc: 'Scan the QR code from your email or install directly from our app. Takes under 2 minutes.', icon: QrCode },
-  { num: '03', title: 'Arrive & connect', desc: 'Your eSIM activates the moment you land. No settings to change. You are on the local network instantly.', icon: Wifi },
+  { num: '01', title: 'Pick your plan', desc: 'Browse 200+ destinations, pick your data allowance, and checkout in seconds — no account required.', icon: Globe },
+  { num: '02', title: 'Install your eSIM', desc: 'Scan the QR code from your email or install from our app. Takes under 2 minutes on any eSIM-ready device.', icon: QrCode },
+  { num: '03', title: 'Arrive & connect', desc: 'Your eSIM activates on landing. No settings, no SIM swap, no airport kiosk. You are on the local network instantly.', icon: Wifi },
 ]
-
-/* --- Component --- */
 
 export function HowItWorks() {
   const [deviceSearch, setDeviceSearch] = useState('')
   const [installTab, setInstallTab] = useState<'iphone' | 'android'>('iphone')
-  const containerRef = useRef<HTMLDivElement>(null)
-  const stepsRef = useRef<HTMLDivElement>(null)
-  const isStepsInView = useInView(stepsRef, { once: true, margin: '-100px' })
-
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] })
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0])
-  const heroScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.95])
 
   const filteredDevices = devices.filter(d =>
     d.name.toLowerCase().includes(deviceSearch.toLowerCase()) ||
@@ -156,17 +43,16 @@ export function HowItWorks() {
   return (
     <>
       {/* ─── HERO ─── */}
-      <section ref={containerRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <motion.div className="absolute inset-0" style={{ opacity: heroOpacity }}>
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
           <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #0b1628 0%, #132238 50%, #0f172a 100%)' }} />
           <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-ds-green opacity-[0.03] blur-[100px]" />
           <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-white opacity-[0.02] blur-[80px]" />
-          {/* Grid pattern */}
           <svg className="absolute inset-0 w-full h-full opacity-[0.02]" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="#fff" strokeWidth="0.5" /></pattern></defs>
             <rect width="100" height="100" fill="url(#grid)" />
           </svg>
-        </motion.div>
+        </div>
 
         <div className="wrap relative z-10 pt-28 pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -177,19 +63,18 @@ export function HowItWorks() {
                 <span className="text-ds-green">3 minutes</span>
                 <span className="text-white/30"> flat.</span>
               </h1>
-              <p className="text-base md:text-lg text-white/50 leading-relaxed max-w-[480px] mb-8">
-                No physical SIM, no airport kiosk, no roaming bills. Buy online, install at home, arrive connected.
+              <p className="text-base md:text-lg text-white/50 leading-relaxed max-w-[520px] mb-8">
+                Buy online, scan a QR code, and you are live. No physical SIM, no airport kiosk, no roaming charges. DataSafari works in over 190 countries with local 4G/5G speeds.
               </p>
               <div className="flex gap-3">
                 <a href="/#plans"><Button variant="primary" size="lg">Get your eSIM</Button></a>
-                <a href="#install"><Button variant="outline" size="lg" className="text-white border-white/25 hover:border-white hover:bg-white/6">See how</Button></a>
+                <a href="#install"><Button variant="outline" size="lg" className="text-white border-white/25 hover:border-white hover:bg-white/6">Installation guide</Button></a>
               </div>
-              {/* Mini stats */}
               <div className="flex gap-6 mt-10 pt-8 border-t border-white/[0.06]">
                 {[
                   { label: '190+ countries', icon: Globe },
                   { label: '3 min activation', icon: Zap },
-                  { label: '50K travellers', icon: Shield },
+                  { label: '50K+ travellers', icon: Shield },
                 ].map((s) => (
                   <div key={s.label} className="flex items-center gap-2 text-xs text-white/40">
                     <s.icon size={13} className="text-ds-green" />
@@ -204,48 +89,29 @@ export function HowItWorks() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease, delay: 0.2 }}
-              style={{ scale: heroScale }}
             >
-              {/* Phone + QR + Globe composition */}
-              <div className="relative flex items-center gap-6">
-                {/* QR code floating left */}
+              <div className="relative">
+                <img src="/assets/mockups/iphone-esim.svg" alt="iPhone eSIM setup" className="w-52 h-auto drop-shadow-2xl" />
                 <motion.div
-                  className="absolute -left-16 top-8 w-20 h-20 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] rounded-2xl flex items-center justify-center"
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease }}
+                  className="absolute -top-2 -right-2 w-10 h-10 bg-ds-green rounded-full flex items-center justify-center text-ds-ink shadow-lg shadow-ds-green/30"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.8, type: 'spring', stiffness: 300 }}
                 >
-                  <QRIcon className="w-12 h-12 text-ds-green" />
+                  <CheckCircle2 size={20} />
                 </motion.div>
-
-                {/* Phone */}
-                <div className="relative">
-                  <PhoneSVG className="w-28 text-white" animating />
-                  <motion.div
-                    className="absolute -top-3 -right-3 w-8 h-8 bg-ds-green rounded-full flex items-center justify-center text-ds-ink text-xs font-bold shadow-lg shadow-ds-green/30"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.8, type: 'spring', stiffness: 300 }}
-                  >
-                    <CheckCircle2 size={16} />
-                  </motion.div>
-                </div>
-
-                {/* Globe floating right */}
                 <motion.div
-                  className="absolute -right-20 bottom-4 w-28 h-28 bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-full flex items-center justify-center"
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease, delay: 1 }}
+                  className="absolute -bottom-3 -left-4 px-4 py-2 bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl flex items-center gap-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1, duration: 0.5 }}
                 >
-                  <GlobeIllustration className="w-20 h-20" />
-                </motion.div>
-
-                {/* Signal bars floating bottom */}
-                <motion.div
-                  className="absolute -bottom-6 left-8 w-16 h-12 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] rounded-xl flex items-center justify-center"
-                  animate={{ y: [0, -4, 0] }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease, delay: 0.5 }}
-                >
-                  <SignalBars className="w-10 h-8" />
+                  <div className="flex -space-x-1.5">
+                    {['#01db5d', '#f59e0b', '#3b82f6'].map((c, i) => (
+                      <div key={i} className="w-5 h-5 rounded-full border border-white/20" style={{ background: c }} />
+                    ))}
+                  </div>
+                  <span className="text-[10px] text-white/70 font-medium">4.9 &middot; 50K</span>
                 </motion.div>
               </div>
             </motion.div>
@@ -254,24 +120,23 @@ export function HowItWorks() {
       </section>
 
       {/* ─── VISUAL TIMELINE: 3 STEPS ─── */}
-      <section ref={stepsRef} className="py-24 md:py-32 bg-white overflow-hidden">
+      <section className="py-24 md:py-32 bg-white overflow-hidden">
         <div className="wrap">
           <motion.div {...fadeUp()} className="text-center max-w-[600px] mx-auto mb-20">
             <Badge><Zap size={13} /> How it works</Badge>
             <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-ds-ink leading-[1.12] mt-3 mb-3">
               Three steps, zero hassle.
             </h2>
-            <p className="text-ds-muted leading-relaxed">From purchase to connection in minutes. No store, no SIM tray, no stress.</p>
+            <p className="text-ds-muted leading-relaxed">From purchase to connection in minutes. No physical SIM, no paperwork, no waiting in line.</p>
           </motion.div>
 
-          {/* Timeline */}
           <div className="relative max-w-[900px] mx-auto">
-            {/* Connecting line */}
             <div className="absolute left-[31px] md:left-1/2 top-0 bottom-0 w-[2px] bg-ds-line hidden md:block" />
             <motion.div
               className="absolute left-[31px] md:left-1/2 top-0 w-[2px] bg-ds-green hidden md:block"
               initial={{ height: 0 }}
-              animate={isStepsInView ? { height: '100%' } : {}}
+              whileInView={{ height: '100%' }}
+              viewport={{ once: true }}
               transition={{ duration: 1.5, ease }}
             />
 
@@ -286,7 +151,6 @@ export function HowItWorks() {
                   viewport={{ once: true, margin: '-100px' }}
                   transition={{ duration: 0.6, ease, delay: i * 0.15 }}
                 >
-                  {/* Dot */}
                   <div className="relative z-10 shrink-0">
                     <motion.div
                       className="w-16 h-16 rounded-full bg-white border-2 border-ds-green flex items-center justify-center shadow-lg shadow-ds-green/10"
@@ -298,17 +162,17 @@ export function HowItWorks() {
                     </motion.div>
                   </div>
 
-                  {/* Content card */}
-                  <motion.div
-                    className={`flex-1 max-w-[380px] ${isLeft ? 'md:text-right' : 'md:text-left'}`}
-                    whileInView={{ x: [isLeft ? -20 : 20, 0] }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, ease, delay: i * 0.15 + 0.2 }}
-                  >
-                    <span className="text-[11px] font-extrabold tracking-[2px] text-ds-green uppercase mb-2 block">{step.num}</span>
-                    <h3 className="text-xl font-bold text-ds-ink mb-3">{step.title}</h3>
-                    <p className="text-sm text-ds-muted leading-relaxed">{step.desc}</p>
-                  </motion.div>
+                  <div className={`flex-1 max-w-[380px] ${isLeft ? 'md:text-right' : 'md:text-left'}`}>
+                    <motion.div
+                      whileInView={{ x: [isLeft ? -20 : 20, 0] }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, ease, delay: i * 0.15 + 0.2 }}
+                    >
+                      <span className="text-[11px] font-extrabold tracking-[2px] text-ds-green uppercase mb-2 block">{step.num}</span>
+                      <h3 className="text-xl font-bold text-ds-ink mb-3">{step.title}</h3>
+                      <p className="text-sm text-ds-muted leading-relaxed">{step.desc}</p>
+                    </motion.div>
+                  </div>
                 </motion.div>
               )
             })}
@@ -326,7 +190,7 @@ export function HowItWorks() {
             <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-white leading-[1.12] mt-3 mb-3">
               Works with almost every modern phone.
             </h2>
-            <p className="text-white/45 leading-relaxed">Most phones from 2019+ support eSIM. Search your model below.</p>
+            <p className="text-white/45 leading-relaxed">Most phones from 2019 onwards support eSIM. If your phone has an EID number, you are good to go. Dial <span className="text-ds-green font-mono">*#06#</span> to check.</p>
           </motion.div>
 
           <motion.div {...fadeUp(0.1)} className="max-w-[400px] mx-auto mb-10">
@@ -378,11 +242,10 @@ export function HowItWorks() {
             <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-ds-ink leading-[1.12] mt-3 mb-3">
               Install before you fly.
             </h2>
-            <p className="text-ds-muted leading-relaxed">Buy from anywhere. Install at home or in the airport lounge. Activates on arrival.</p>
+            <p className="text-ds-muted leading-relaxed">Buy from anywhere. Install at home or in the airport lounge. The eSIM activates automatically when you land.</p>
           </motion.div>
 
           <div className="max-w-[900px] mx-auto">
-            {/* Tabs */}
             <motion.div {...fadeUp()} className="flex justify-center mb-10">
               <div className="inline-flex bg-ds-wash rounded-full p-1">
                 {(['iphone', 'android'] as const).map((t) => (
@@ -400,7 +263,6 @@ export function HowItWorks() {
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-              {/* Phone mockup */}
               <motion.div
                 key={installTab}
                 className="flex justify-center"
@@ -408,30 +270,13 @@ export function HowItWorks() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, ease }}
               >
-                <div className="relative">
-                  <div className="w-[200px] h-[400px] rounded-[30px] border-[3px] border-ds-ink overflow-hidden relative bg-white shadow-xl">
-                    {/* Dynamic notch */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100px] h-[28px] bg-ds-ink rounded-b-[14px] z-10 flex items-center justify-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-ds-green/80" />
-                      <div className="w-8 h-2 rounded-full bg-ds-ink/60" />
-                    </div>
-                    {/* Dynamic status bar */}
-                    <div className="pt-10 px-5 pb-4">
-                      <div className="flex items-center gap-1.5 mb-4">
-                        <div className="w-3 h-3 rounded-full bg-ds-green" />
-                        <span className="text-[10px] font-bold text-ds-ink">DataSafari</span>
-                        <span className="ml-auto text-[10px] text-ds-muted">9:41</span>
-                      </div>
-                      {/* Settings screen content */}
-                      <AnimatedScreenContent tab={installTab} />
-                    </div>
-                    {/* Home indicator */}
-                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[5px] bg-ds-ink/10 rounded-full" />
-                  </div>
-                </div>
+                <img
+                  src={installTab === 'iphone' ? '/assets/mockups/iphone-esim.svg' : '/assets/mockups/android-esim.svg'}
+                  alt={`${installTab === 'iphone' ? 'iPhone' : 'Android'} eSIM setup`}
+                  className="w-52 h-auto drop-shadow-xl"
+                />
               </motion.div>
 
-              {/* Steps */}
               <motion.div
                 key={`steps-${installTab}`}
                 initial={{ opacity: 0, x: 30 }}
@@ -480,7 +325,7 @@ export function HowItWorks() {
                 <div className="mt-6 p-4 bg-ds-green/5 border border-ds-green/15 rounded-r2">
                   <p className="text-xs text-ds-body flex items-center gap-2">
                     <Clock size={13} className="text-ds-green shrink-0" />
-                    Install before you travel. The plan only activates when you connect to a local network at your destination.
+                    The plan only activates when you connect to a local network at your destination. No charges until you land.
                   </p>
                 </div>
               </motion.div>
@@ -497,18 +342,26 @@ export function HowItWorks() {
             <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-ds-ink leading-[1.12] mt-3 mb-3">
               No contest.
             </h2>
-            <p className="text-ds-muted leading-relaxed">Digital SIM is faster, greener, and built for how we travel today.</p>
+            <p className="text-ds-muted leading-relaxed">Digital SIM is faster, more secure, and better for the planet. Here is how they stack up.</p>
           </motion.div>
 
           <motion.div {...fadeUp(0.1)} className="max-w-[750px] mx-auto">
-            {/* Header */}
             <div className="hidden md:grid grid-cols-[1fr_100px_100px] gap-4 px-5 py-3 text-xs font-bold uppercase tracking-wider text-ds-muted border-b border-ds-line">
               <span>Feature</span>
               <span className="text-center text-ds-green-dark">eSIM</span>
-              <span className="text-center">SIM</span>
+              <span className="text-center">Physical SIM</span>
             </div>
 
-            {comparison.map((row, i) => (
+            {[
+              { feature: 'Activation time', esim: '3 minutes', sim: 'Days to deliver' },
+              { feature: 'Security', esim: 'Cannot be removed', sim: 'Card can be stolen' },
+              { feature: 'Multiple lines', esim: '8+ eSIMs', sim: 'Dual SIM max' },
+              { feature: 'Roaming charges', esim: 'Zero, local data', sim: 'Expensive roaming' },
+              { feature: 'Pre-trip setup', esim: 'Buy & install anytime', sim: 'Must have card before' },
+              { feature: 'Lost phone', esim: 'Remotely removable', sim: 'Card stays active' },
+              { feature: 'Switch provider', esim: 'Instant, in-app', sim: 'Buy new card' },
+              { feature: 'Environmental impact', esim: 'Zero plastic waste', sim: 'Plastic + shipping' },
+            ].map((row, i) => (
               <motion.div
                 key={i}
                 className="grid grid-cols-1 md:grid-cols-[1fr_100px_100px] gap-2 md:gap-4 px-5 py-4 border-b border-ds-line last:border-0 items-center transition-all duration-200 hover:bg-white/60"
@@ -553,59 +406,5 @@ export function HowItWorks() {
         </div>
       </section>
     </>
-  )
-}
-
-/* --- Animated phone screen content --- */
-
-function AnimatedScreenContent({ tab }: { tab: 'iphone' | 'android' }) {
-  const rows = tab === 'iphone'
-    ? [
-        { label: 'Cellular', val: 'Add eSIM', highlight: true },
-        { label: 'Wi-Fi', val: 'Connected', highlight: false },
-        { label: 'Bluetooth', val: 'On', highlight: false },
-        { label: 'DataSafari', val: 'Installing...', highlight: true, green: true },
-      ]
-    : [
-        { label: 'SIM Manager', val: 'Add eSIM', highlight: true },
-        { label: 'Wi-Fi', val: 'Connected', highlight: false },
-        { label: 'Bluetooth', val: 'On', highlight: false },
-        { label: 'DataSafari', val: 'Ready', highlight: true, green: true },
-      ]
-
-  return (
-    <div className="space-y-2">
-      {rows.map((r, i) => (
-        <motion.div
-          key={r.label}
-          className="flex items-center justify-between py-2 px-2.5 rounded-r"
-          style={{ background: r.highlight ? 'rgba(1,219,93,.08)' : 'transparent' }}
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: i * 0.15, duration: 0.3 }}
-        >
-          <span className="text-[10px] font-medium text-ds-ink">{r.label}</span>
-          <span className={`text-[10px] font-semibold ${r.green ? 'text-ds-green-dark' : 'text-ds-muted'}`}>
-            {r.val}
-          </span>
-        </motion.div>
-      ))}
-      {/* QR scan animation */}
-      <motion.div
-        className="mt-3 mx-auto w-20 h-20 rounded-lg border-2 border-dashed border-ds-green/40 flex items-center justify-center"
-        animate={{ rotate: [0, 3, -3, 0] }}
-        transition={{ duration: 3, repeat: Infinity, ease }}
-      >
-        <QrCode size={28} className="text-ds-green/60" />
-      </motion.div>
-      <motion.p
-        className="text-[9px] text-ds-muted text-center mt-1"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-      >
-        Scan QR code to install
-      </motion.p>
-    </div>
   )
 }
