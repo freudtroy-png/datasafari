@@ -1,69 +1,78 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 484" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" fill="none">
   <defs>
-    <linearGradient id="androidB" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#1a1a1a"/>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="phoneBody" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#222"/>
+      <stop offset="30%" stop-color="#1a1a1a"/>
       <stop offset="100%" stop-color="#0d0d0d"/>
     </linearGradient>
-    <linearGradient id="scrGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f8fafc"/>
-      <stop offset="100%" stop-color="#eef2f6"/>
+    <linearGradient id="screenGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
     </linearGradient>
-    <filter id="phoneShadow" x="-10%" y="-5%" width="120%" height="110%">
-      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000" flood-opacity="0.35"/>
+    <filter id="phoneShadow" x="-20%" y="-10%" width="140%" height="130%">
+      <feDropShadow dx="0" dy="20" stdDeviation="30" flood-color="#0f172a" flood-opacity="0.25"/>
     </filter>
   </defs>
+  <!-- Background scene -->
+  <rect width="400" height="600" fill="url(#bgGrad)"/>
+  <rect x="0" y="420" width="400" height="180" fill="#e2e8f0" opacity="0.5"/>
+  <line x1="0" y1="420" x2="400" y2="420" stroke="#cbd5e1" stroke-width="1"/>
   <!-- Phone body -->
   <g filter="url(#phoneShadow)">
-    <rect x="12" y="2" width="216" height="480" rx="40" fill="url(#androidB)" stroke="#2a2a2a" stroke-width="1.5"/>
-    <!-- Side buttons -->
-    <rect x="8" y="80" width="4" height="32" rx="2" fill="#1a1a1a"/>
-    <rect x="8" y="124" width="4" height="52" rx="2" fill="#1a1a1a"/>
-    <rect x="228" y="160" width="4" height="64" rx="2" fill="#1a1a1a"/>
-    <!-- Screen -->
-    <rect x="20" y="10" width="200" height="464" rx="32" fill="#fff"/>
-    <rect x="20" y="10" width="200" height="464" rx="32" fill="url(#scrGrad)"/>
+    <rect x="94" y="36" width="212" height="528" rx="44" fill="url(#phoneBody)" stroke="#333" stroke-width="1.5"/>
+    <!-- Buttons -->
+    <rect x="88" y="130" width="6" height="36" rx="3" fill="#1a1a1a"/>
+    <rect x="88" y="180" width="6" height="60" rx="3" fill="#1a1a1a"/>
+    <rect x="306" y="200" width="6" height="72" rx="3" fill="#1a1a1a"/>
+    <!-- Screen area - curves exactly match body -->
+    <rect x="104" y="48" width="192" height="504" rx="36" fill="#0f172a"/>
+    <rect x="104" y="48" width="192" height="504" rx="36" fill="url(#screenGlow)"/>
     <!-- Punch-hole camera -->
-    <circle cx="190" cy="26" r="5" fill="#1a1a2a" stroke="#2a2a3a" stroke-width="0.5"/>
-    <circle cx="190" cy="26" r="2" fill="#3a3a4a"/>
+    <circle cx="268" cy="66" r="5.5" fill="#1a1a2a" stroke="#333" stroke-width="0.5"/>
+    <circle cx="268" cy="66" r="2.5" fill="#444"/>
     <!-- Status bar -->
-    <text x="32" y="29" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#0f172a">9:41</text>
-    <text x="180" y="29" font-family="system-ui,sans-serif" font-size="8" fill="#01db5d">5G</text>
-    <!-- Header -->
-    <rect x="20" y="42" width="200" height="36" fill="rgba(1,219,93,.06)"/>
-    <text x="32" y="66" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#0f172a">SIM Manager</text>
-    <!-- SIM 1 -->
-    <rect x="24" y="86" width="192" height="44" rx="8" fill="rgba(255,255,255,.04)"/>
-    <text x="40" y="106" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#0f172a">SIM 1</text>
-    <text x="40" y="120" font-family="system-ui,sans-serif" font-size="9" fill="#64748b">Physical SIM</text>
-    <text x="170" y="106" font-family="system-ui,sans-serif" font-size="9" fill="#01db5d">Active</text>
-    <!-- SIM 2 -->
-    <rect x="24" y="134" width="192" height="44" rx="8" fill="rgba(1,219,93,.08)"/>
-    <text x="40" y="154" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#0f172a">SIM 2</text>
-    <text x="40" y="168" font-family="system-ui,sans-serif" font-size="9" fill="#64748b">DataSafari eSIM</text>
-    <text x="170" y="154" font-family="system-ui,sans-serif" font-size="9" fill="#01db5d">Data</text>
+    <text x="116" y="69" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#0f172a">9:41</text>
+    <text x="270" y="69" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#01db5d">5G</text>
+    <!-- Header strip -->
+    <rect x="104" y="84" width="192" height="36" fill="rgba(1,219,93,.06)"/>
+    <text x="200" y="108" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="600" fill="#0f172a" text-anchor="middle">SIM Manager</text>
+    <!-- SIM 1 card -->
+    <rect x="110" y="128" width="180" height="46" rx="10" fill="rgba(0,0,0,.02)"/>
+    <text x="126" y="150" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600" fill="#0f172a">SIM 1</text>
+    <text x="126" y="164" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#64748b">Physical SIM</text>
+    <text x="248" y="150" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#01db5d">Active</text>
+    <!-- SIM 2 card -->
+    <rect x="110" y="180" width="180" height="46" rx="10" fill="rgba(1,219,93,.08)"/>
+    <text x="126" y="202" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600" fill="#0f172a">SIM 2</text>
+    <text x="126" y="216" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#64748b">DataSafari eSIM</text>
+    <text x="248" y="202" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#01db5d">Data</text>
     <!-- Add eSIM button -->
-    <rect x="60" y="190" width="120" height="36" rx="18" fill="#01db5d"/>
-    <text x="120" y="213" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">+ Add eSIM</text>
-    <!-- Data usage -->
-    <rect x="24" y="238" width="192" height="56" rx="8" fill="rgba(255,255,255,.03)"/>
-    <text x="40" y="258" font-family="system-ui,sans-serif" font-size="10" font-weight="500" fill="#0f172a">Data usage</text>
-    <text x="162" y="258" font-family="system-ui,sans-serif" font-size="10" fill="#01db5d">3.2 GB left</text>
-    <rect x="40" y="268" width="160" height="3" rx="1.5" fill="#e2e8f0"/>
-    <rect x="40" y="268" width="96" height="3" rx="1.5" fill="#01db5d"/>
-    <text x="40" y="284" font-family="system-ui,sans-serif" font-size="8" fill="#94a3b8">Resets in 4 days</text>
-    <!-- Data roaming toggle -->
-    <rect x="24" y="302" width="192" height="44" rx="8" fill="rgba(255,255,255,.03)"/>
-    <text x="40" y="328" font-family="system-ui,sans-serif" font-size="10" font-weight="500" fill="#0f172a">Data roaming</text>
-    <rect x="182" y="315" width="24" height="18" rx="9" fill="#01db5d"/>
-    <circle cx="195" cy="324" r="7" fill="#fff"/>
+    <rect x="142" y="238" width="116" height="38" rx="19" fill="#01db5d"/>
+    <text x="200" y="263" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">+ Add eSIM</text>
+    <!-- Data usage card -->
+    <rect x="110" y="288" width="180" height="56" rx="10" fill="rgba(0,0,0,.02)"/>
+    <text x="126" y="310" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="500" fill="#0f172a">Data usage</text>
+    <text x="248" y="310" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#01db5d">3.2 GB</text>
+    <rect x="126" y="322" width="148" height="4" rx="2" fill="#e2e8f0"/>
+    <rect x="126" y="322" width="90" height="4" rx="2" fill="#01db5d"/>
+    <text x="126" y="338" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">Resets in 4 days</text>
+    <!-- Roaming toggle -->
+    <rect x="110" y="354" width="180" height="44" rx="10" fill="rgba(0,0,0,.02)"/>
+    <text x="126" y="380" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="500" fill="#0f172a">Data roaming</text>
+    <rect x="262" y="367" width="22" height="18" rx="9" fill="#01db5d"/>
+    <circle cx="275" cy="376" r="7" fill="#fff"/>
     <!-- Preferred network -->
-    <rect x="24" y="350" width="192" height="44" rx="8" fill="rgba(255,255,255,.03)"/>
-    <text x="40" y="376" font-family="system-ui,sans-serif" font-size="10" font-weight="500" fill="#0f172a">Preferred network</text>
-    <text x="164" y="376" font-family="system-ui,sans-serif" font-size="9" fill="#64748b">5G / LTE</text>
-    <!-- Hint -->
-    <rect x="56" y="404" width="128" height="24" rx="6" fill="rgba(1,219,93,.06)"/>
-    <text x="120" y="420" font-family="system-ui,sans-serif" font-size="8" fill="#01db5d" opacity="0.8" text-anchor="middle">Installs in under 2 minutes</text>
+    <rect x="110" y="404" width="180" height="44" rx="10" fill="rgba(0,0,0,.02)"/>
+    <text x="126" y="430" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="500" fill="#0f172a">Preferred network</text>
+    <text x="248" y="430" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#64748b">5G / LTE</text>
+    <!-- Info badge -->
+    <rect x="136" y="460" width="128" height="24" rx="6" fill="rgba(1,219,93,.06)"/>
+    <text x="200" y="476" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#01db5d" opacity="0.8" text-anchor="middle">Installs in under 2 mins</text>
     <!-- Nav hint -->
-    <rect x="96" y="468" width="48" height="2" rx="1" fill="#cbd5e1"/>
+    <rect x="177" y="536" width="46" height="3" rx="1.5" fill="#cbd5e1"/>
   </g>
 </svg>

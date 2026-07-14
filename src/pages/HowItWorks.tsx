@@ -91,7 +91,7 @@ export function HowItWorks() {
               transition={{ duration: 0.8, ease, delay: 0.2 }}
             >
               <div className="relative">
-                <img src="/assets/mockups/iphone-esim.svg" alt="iPhone eSIM setup" className="w-52 h-auto drop-shadow-2xl" />
+                <img src="/assets/mockups/iphone-esim.png" alt="iPhone eSIM setup" className="w-52 h-auto drop-shadow-2xl" />
                 <motion.div
                   className="absolute -top-2 -right-2 w-10 h-10 bg-ds-green rounded-full flex items-center justify-center text-ds-ink shadow-lg shadow-ds-green/30"
                   initial={{ scale: 0 }}
@@ -271,7 +271,7 @@ export function HowItWorks() {
                 transition={{ duration: 0.5, ease }}
               >
                 <img
-                  src={installTab === 'iphone' ? '/assets/mockups/iphone-esim.svg' : '/assets/mockups/android-esim.svg'}
+                  src={installTab === 'iphone' ? '/assets/mockups/iphone-esim.png' : '/assets/mockups/android-esim.png'}
                   alt={`${installTab === 'iphone' ? 'iPhone' : 'Android'} eSIM setup`}
                   className="w-52 h-auto drop-shadow-xl"
                 />

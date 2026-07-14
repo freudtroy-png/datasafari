@@ -1,74 +1,92 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 484" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" fill="none">
   <defs>
-    <linearGradient id="iphoneB" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2a2a3a"/>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="phoneBody" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3a3a4a"/>
+      <stop offset="30%" stop-color="#2a2a3a"/>
       <stop offset="100%" stop-color="#1a1a2a"/>
     </linearGradient>
-    <linearGradient id="scrGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f8fafc"/>
-      <stop offset="100%" stop-color="#eef2f6"/>
+    <linearGradient id="screenGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
     </linearGradient>
-    <filter id="phoneShadow" x="-10%" y="-5%" width="120%" height="110%">
-      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000" flood-opacity="0.35"/>
+    <filter id="phoneShadow" x="-20%" y="-10%" width="140%" height="130%">
+      <feDropShadow dx="0" dy="20" stdDeviation="30" flood-color="#0f172a" flood-opacity="0.25"/>
+    </filter>
+    <filter id="innerShadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
+      <feOffset dx="0" dy="2" result="offset"/>
+      <feComposite in="SourceGraphic" in2="offset" operator="over"/>
     </filter>
   </defs>
-  <!-- Phone body -->
+  <!-- Background scene -->
+  <rect width="400" height="600" fill="url(#bgGrad)" rx="0"/>
+  <!-- Subtle desk line -->
+  <rect x="0" y="420" width="400" height="180" fill="#e2e8f0" opacity="0.5"/>
+  <line x1="0" y1="420" x2="400" y2="420" stroke="#cbd5e1" stroke-width="1"/>
+  <!-- Phone body with proper curves -->
   <g filter="url(#phoneShadow)">
-    <rect x="16" y="2" width="208" height="480" rx="44" fill="url(#iphoneB)" stroke="#3a3a4a" stroke-width="1.5"/>
+    <rect x="100" y="40" width="200" height="520" rx="48" fill="url(#phoneBody)" stroke="#4a4a5a" stroke-width="1.5"/>
     <!-- Side buttons -->
-    <rect x="12" y="80" width="4" height="28" rx="2" fill="#2a2a3a"/>
-    <rect x="12" y="120" width="4" height="48" rx="2" fill="#2a2a3a"/>
-    <rect x="224" y="140" width="4" height="60" rx="2" fill="#2a2a3a"/>
-    <!-- Screen -->
-    <rect x="26" y="14" width="188" height="456" rx="34" fill="#fff"/>
-    <rect x="26" y="14" width="188" height="456" rx="34" fill="url(#scrGrad)"/>
-    <!-- Status bar area -->
-    <rect x="26" y="14" width="188" height="40" rx="34" fill="#f8fafc"/>
-    <rect x="26" y="14" width="188" height="40" fill="#f8fafc"/>
-    <!-- Dynamic Island notch -->
-    <rect x="90" y="6" width="60" height="24" rx="12" fill="#0f172a"/>
-    <circle cx="108" cy="18" r="3" fill="#1e293b"/>
-    <circle cx="120" cy="18" r="2" fill="#01db5d"/>
-    <!-- Status bar items -->
-    <text x="36" y="30" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#0f172a">9:41</text>
-    <text x="176" y="30" font-family="system-ui,sans-serif" font-size="9" font-weight="600" fill="#64748b">5G</text>
-    <!-- Nav bar -->
-    <text x="36" y="50" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#0f172a">Cellular</text>
-    <text x="164" y="50" font-family="system-ui,sans-serif" font-size="10" fill="#01db5d">&gt;</text>
-    <!-- Add eSIM row -->
-    <rect x="28" y="58" width="184" height="48" rx="8" fill="rgba(1,219,93,.08)"/>
-    <text x="44" y="80" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#0f172a">Add eSIM</text>
-    <text x="44" y="96" font-family="system-ui,sans-serif" font-size="9" fill="#64748b">Scan QR code</text>
-    <!-- Settings rows -->
-    <line x1="36" y1="122" x2="204" y2="122" stroke="#e2e8f0" stroke-width="0.5"/>
-    <text x="36" y="138" font-family="system-ui,sans-serif" font-size="10" fill="#334155">Current Plan</text>
-    <text x="154" y="138" font-family="system-ui,sans-serif" font-size="10" font-weight="600" fill="#01db5d">DataSafari</text>
-    <line x1="36" y1="158" x2="204" y2="158" stroke="#e2e8f0" stroke-width="0.5"/>
-    <text x="36" y="174" font-family="system-ui,sans-serif" font-size="10" fill="#334155">Data Roaming</text>
-    <text x="178" y="174" font-family="system-ui,sans-serif" font-size="10" font-weight="600" fill="#01db5d">On</text>
-    <line x1="36" y1="194" x2="204" y2="194" stroke="#e2e8f0" stroke-width="0.5"/>
-    <text x="36" y="210" font-family="system-ui,sans-serif" font-size="10" fill="#334155">Network Selection</text>
-    <text x="166" y="210" font-family="system-ui,sans-serif" font-size="10" fill="#64748b">Auto</text>
-    <!-- QR code preview -->
-    <rect x="70" y="224" width="100" height="100" rx="10" fill="rgba(1,219,93,.04)" stroke="rgba(1,219,93,.2)" stroke-width="1" stroke-dasharray="3 3"/>
-    <g transform="translate(90,244)" stroke="#01db5d" stroke-width="2">
-      <rect x="0" y="0" width="16" height="16" rx="2" fill="none"/>
-      <rect x="3" y="3" width="4" height="4" rx="0.5" fill="#01db5d" opacity="0.4"/>
-      <rect x="12" y="3" width="2" height="2" rx="0.3" fill="#01db5d" opacity="0.4"/>
-      <rect x="3" y="12" width="2" height="2" rx="0.3" fill="#01db5d" opacity="0.4"/>
-      <rect x="24" y="0" width="16" height="16" rx="2" fill="none"/>
-      <rect x="27" y="3" width="10" height="10" rx="1" fill="#01db5d" opacity="0.4"/>
-      <rect x="0" y="24" width="16" height="16" rx="2" fill="none"/>
-      <rect x="3" y="27" width="4" height="4" rx="0.5" fill="#01db5d" opacity="0.4"/>
-      <rect x="12" y="27" width="2" height="2" rx="0.3" fill="#01db5d" opacity="0.4"/>
-      <rect x="12" y="36" width="2" height="2" rx="0.3" fill="#01db5d" opacity="0.4"/>
-      <rect x="24" y="24" width="6" height="6" rx="1" fill="#01db5d" opacity="0.4"/>
-      <rect x="32" y="24" width="6" height="6" rx="1" fill="#01db5d" opacity="0.3"/>
-      <rect x="24" y="32" width="6" height="6" rx="1" fill="#01db5d" opacity="0.3"/>
-      <rect x="32" y="32" width="6" height="6" rx="1" fill="#01db5d" opacity="0.4"/>
+    <rect x="94" y="120" width="6" height="32" rx="3" fill="#2a2a3a"/>
+    <rect x="94" y="170" width="6" height="56" rx="3" fill="#2a2a3a"/>
+    <rect x="300" y="200" width="6" height="68" rx="3" fill="#2a2a3a"/>
+    <!-- Screen area - curves match body -->
+    <rect x="112" y="54" width="176" height="492" rx="38" fill="#0f172a"/>
+    <!-- Screen content -->
+    <rect x="112" y="54" width="176" height="492" rx="38" fill="url(#screenGlow)"/>
+    <!-- Dynamic Island -->
+    <rect x="177" y="46" width="46" height="18" rx="9" fill="#0f172a"/>
+    <circle cx="190" cy="55" r="3" fill="#1e293b"/>
+    <circle cx="200" cy="55" r="1.8" fill="#01db5d"/>
+    <!-- Status bar -->
+    <text x="124" y="72" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#0f172a">9:41</text>
+    <text x="262" y="72" font-family="system-ui,-apple-system,sans-serif" font-size="9" font-weight="600" fill="#64748b">5G</text>
+    <!-- Back + Title -->
+    <text x="124" y="94" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#01db5d">&lt; Back</text>
+    <text x="220" y="94" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="600" fill="#0f172a" text-anchor="middle">Cellular</text>
+    <!-- Add eSIM card -->
+    <rect x="118" y="106" width="164" height="52" rx="10" fill="rgba(1,219,93,.08)"/>
+    <text x="132" y="130" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#0f172a">Add eSIM</text>
+    <text x="132" y="148" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#64748b">Scan QR code or enter details manually</text>
+    <text x="268" y="130" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#01db5d">&gt;</text>
+    <!-- Settings rows with rounded corners -->
+    <rect x="118" y="168" width="164" height="40" rx="8" fill="rgba(0,0,0,.02)"/>
+    <text x="132" y="194" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#334155">Current plan</text>
+    <text x="240" y="194" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="600" fill="#01db5d">DataSafari</text>
+    <rect x="118" y="212" width="164" height="40" rx="8" fill="rgba(0,0,0,.02)"/>
+    <text x="132" y="238" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#334155">Data roaming</text>
+    <rect x="262" y="221" width="18" height="22" rx="11" fill="#01db5d"/>
+    <circle cx="274" cy="232" r="8" fill="#fff"/>
+    <rect x="118" y="256" width="164" height="40" rx="8" fill="rgba(0,0,0,.02)"/>
+    <text x="132" y="282" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#334155">Network</text>
+    <text x="254" y="282" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#64748b">Automatic</text>
+    <!-- QR code area -->
+    <rect x="150" y="310" width="100" height="100" rx="14" fill="rgba(1,219,93,.04)" stroke="rgba(1,219,93,.25)" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <!-- QR Pattern -->
+    <g transform="translate(170,330)" stroke="#01db5d" stroke-width="2">
+      <rect x="0" y="0" width="18" height="18" rx="3" fill="none"/>
+      <rect x="3" y="3" width="5" height="5" rx="0.8" fill="#01db5d" opacity="0.4"/>
+      <rect x="13" y="3" width="3" height="3" rx="0.5" fill="#01db5d" opacity="0.4"/>
+      <rect x="3" y="13" width="3" height="3" rx="0.5" fill="#01db5d" opacity="0.4"/>
+      <rect x="26" y="0" width="18" height="18" rx="3" fill="none"/>
+      <rect x="29" y="3" width="12" height="12" rx="1.5" fill="#01db5d" opacity="0.4"/>
+      <rect x="0" y="26" width="18" height="18" rx="3" fill="none"/>
+      <rect x="3" y="29" width="5" height="5" rx="0.8" fill="#01db5d" opacity="0.4"/>
+      <rect x="13" y="29" width="3" height="3" rx="0.5" fill="#01db5d" opacity="0.4"/>
+      <rect x="13" y="40" width="3" height="3" rx="0.5" fill="#01db5d" opacity="0.4"/>
+      <rect x="26" y="26" width="8" height="8" rx="1.2" fill="#01db5d" opacity="0.4"/>
+      <rect x="38" y="26" width="6" height="6" rx="1" fill="#01db5d" opacity="0.3"/>
+      <rect x="26" y="38" width="6" height="6" rx="1" fill="#01db5d" opacity="0.3"/>
+      <rect x="38" y="38" width="6" height="6" rx="1" fill="#01db5d" opacity="0.4"/>
     </g>
-    <text x="120" y="372" font-family="system-ui,sans-serif" font-size="8" fill="#64748b" text-anchor="middle">Scan to install</text>
+    <text x="200" y="432" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle">Scan QR code to install</text>
     <!-- Home indicator -->
-    <rect x="96" y="462" width="48" height="4" rx="2" fill="#cbd5e1"/>
+    <rect x="177" y="528" width="46" height="4" rx="2" fill="#cbd5e1"/>
   </g>
+  <!-- Reflection -->
+  <rect x="112" y="54" width="20" height="492" rx="38" fill="url(#screenGlow)" opacity="0.03"/>
 </svg>
