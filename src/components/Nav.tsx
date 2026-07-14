@@ -38,18 +38,16 @@ export function Nav() {
           <Link to="/" className="flex items-center h-[34px] shrink-0">
             <img src="/assets/icons/datasafari-logo.png" alt="DataSafari" className="h-full w-auto" />
           </Link>
-          <div className="hidden md:flex items-center gap-6 ml-4">
+          <div className="hidden md:flex items-center gap-2 ml-auto">
             {links.map((link) => (
               <Link
                 key={link.label}
                 to={link.href}
-                className="text-sm font-medium text-white/80 hover:text-white transition-colors relative"
+                className="text-sm font-medium text-white/80 hover:text-white transition-colors relative px-3"
               >
                 {link.label}
               </Link>
             ))}
-          </div>
-          <div className="hidden md:flex items-center gap-2 ml-auto">
             <a
               href={isHome ? '#plans' : '/#plans'}
               className="inline-flex items-center justify-center gap-2 rounded-r2 text-xs font-semibold transition-all duration-200 px-[18px] h-9 bg-transparent text-white/85 border border-white/20 hover:border-white hover:text-white"

@@ -30,10 +30,10 @@ export const destinations: Destination[] = [
 export const regions = ['All', 'Europe', 'Asia', 'Americas', 'Africa', 'Middle East', 'Oceania'] as const
 
 export const regionMap: Record<string, string[]> = {
-  Europe: ['GB', 'FR', 'IT', 'DE', 'ES', 'NL'],
-  Asia: ['JP', 'KR', 'TH', 'IN', 'SG', 'CN'],
+  Europe: ['GB', 'FR', 'IT', 'DE', 'ES'],
+  Asia: ['JP', 'KR', 'TH', 'IN', 'SG'],
   Americas: ['US', 'CA', 'BR', 'MX'],
-  Africa: ['ZA', 'EG', 'NG', 'KE'],
-  'Middle East': ['AE', 'SA', 'QA', 'OM'],
-  Oceania: ['AU', 'NZ'],
+  Africa: ['ZA', 'EG'],
+  'Middle East': ['AE'],
+  Oceania: ['AU'],
 }
