@@ -45,11 +45,11 @@
   <div class="nav-inner">
     <a href="index.html" class="nav-logo"><img src="assets/icons/datasafari-logo.png" alt="DataSafari logo"></a>
     <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#destinations">Destinations</a>
       <a href="how-it-works.html">How it works</a>
-      <a href="coverage.html">Coverage</a>
       <a href="index.html#plans">Plans</a>
       <a href="faq.html">FAQ</a>
-      <a href="index.html#reviews">Reviews</a>
     </div>
     <div class="nav-right">
       <a href="index.html#plans" class="btn btn-outline btn-sm">Sign in</a>
@@ -60,15 +60,15 @@
     </button>
   </div>
 </nav>
-<div class="m-nav" id="mnav">
-  <a href="how-it-works.html">How it works</a>
-  <a href="coverage.html">Coverage</a>
-  <a href="index.html#plans">Plans</a>
-  <a href="faq.html">FAQ</a>
-  <a href="index.html#reviews">Reviews</a>
-  <a href="#" class="btn btn-outline">Sign in</a>
-  <a href="index.html#plans" class="btn btn-green">Get eSIM</a>
-</div>
+    <div class="m-nav" id="mnav">
+      <a href="index.html">Home</a>
+      <a href="index.html#destinations">Destinations</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="index.html#plans">Plans</a>
+      <a href="faq.html">FAQ</a>
+      <a href="index.html#plans" class="btn btn-outline">Sign in</a>
+      <a href="index.html#plans" class="btn btn-green">Get eSIM</a>
+    </div>
 
 <section class="legal-hero">
   <div class="wrap">
@@ -221,5 +221,6 @@ const burger=document.getElementById('burger'),burgerIcon=document.getElementByI
 burger.addEventListener('click',()=>{const open=mnav.classList.toggle('show');burgerIcon.innerHTML=open?'<svg width="22" height="22"><use href="#ic-close"/></svg>':'<svg width="22" height="22"><use href="#ic-menu"/></svg>';document.body.style.overflow=open?'hidden':'';});
 mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mnav.classList.remove('show');burgerIcon.innerHTML='<svg width="22" height="22"><use href="#ic-menu"/></svg>';document.body.style.overflow='';}));
 </script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>

@@ -48,8 +48,13 @@ ul{list-style:none}
 .nav-logo{display:flex;align-items:center;height:34px;flex-shrink:0}
 .nav-logo img{height:100%;width:auto}
 .nav-links{display:flex;align-items:center;gap:24px;font-size:14px;font-weight:500;color:rgba(255,255,255,.8)}
-.nav-links a{transition:color .2s}
+.nav-links a{transition:color .2s;position:relative}
 .nav-links a:hover{color:#fff}
+.nav-links a.nav-active{color:var(--ds-green)}
+.nav-links a.nav-active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--ds-green);border-radius:2px}
+.nav-links a:not(.nav-active)::after{content:'';position:absolute;bottom:-4px;left:50%;right:50%;height:2px;background:var(--ds-green);border-radius:2px;transition:all .3s}
+.nav-links a:not(.nav-active):hover::after{left:0;right:0}
+.m-nav a.nav-active{color:var(--ds-green)}
 .nav-right{display:flex;align-items:center;gap:8px;margin-left:auto}
 .nav .btn-outline{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.2)}.nav .btn-outline:hover{border-color:#fff;color:#fff}
 .nav-burger{display:none;background:none;border:none;color:#fff;cursor:pointer;padding:4px;margin-left:auto}

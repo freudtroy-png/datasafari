@@ -47,11 +47,11 @@
   <div class="nav-inner">
     <a href="index.html" class="nav-logo"><img src="assets/icons/datasafari-logo.png" alt="DataSafari logo"></a>
     <div class="nav-links">
+      <a href="index.html">Home</a>
       <a href="index.html#destinations">Destinations</a>
       <a href="how-it-works.html">How it works</a>
       <a href="index.html#plans">Plans</a>
-      <a href="index.html#faq">FAQ</a>
-      <a href="index.html#reviews">Reviews</a>
+      <a href="faq.html">FAQ</a>
     </div>
     <div class="nav-right">
       <a href="index.html#plans" class="btn btn-outline btn-sm">Sign in</a>
@@ -63,12 +63,12 @@
   </div>
 </nav>
 <div class="m-nav" id="mnav">
+  <a href="index.html">Home</a>
   <a href="index.html#destinations">Destinations</a>
   <a href="how-it-works.html">How it works</a>
   <a href="index.html#plans">Plans</a>
-  <a href="index.html#faq">FAQ</a>
-  <a href="index.html#reviews">Reviews</a>
-  <a href="#" class="btn btn-outline">Sign in</a>
+  <a href="faq.html">FAQ</a>
+  <a href="index.html#plans" class="btn btn-outline">Sign in</a>
   <a href="index.html#plans" class="btn btn-green">Get eSIM</a>
 </div>
 
@@ -259,7 +259,7 @@
   }
 </style>
 
-<section class="dest-section" id="destinations">
+<section class="dest-section" id="destinations" data-anim>
   <div class="wrap">
     <!-- header: centered -->
     <div class="dest-header">
@@ -539,7 +539,7 @@
 </script>
 
 <!-- HOW IT WORKS -->
-<section class="hiw" id="how">
+<section class="hiw" id="how" data-anim>
   <div class="wrap">
     <div class="hiw-head">
       <span class="chip"><svg width="13" height="13"><use href="#ic-phone"/></svg> Simple setup</span>
@@ -573,7 +573,7 @@
 </section>
 
 <!-- WHAT IS ESIM -->
-<section class="esim-section" id="esim">
+<section class="esim-section" id="esim" data-anim>
   <div class="wrap">
     <div class="esim-grid">
       <div class="esim-visual" data-aos="fade-up">
@@ -604,7 +604,7 @@
     </div>
   </div>
 </section>
-<section class="sec sec-wash" id="features">
+<section class="sec sec-wash" id="features" data-anim>
   <div class="wrap">
     <div class="sec-head">
       <span class="chip"><svg width="13" height="13"><use href="#ic-zap"/></svg> Why DataSafari</span>
@@ -757,7 +757,7 @@
   @media(max-width:480px){.plans-toggle button{padding:9px 18px;font-size:12px}}
 </style>
 
-<section class="plans-section" id="plans">
+<section class="plans-section" id="plans" data-anim>
   <div class="wrap">
 
     <div class="plans-head">
@@ -947,7 +947,7 @@
   }
 </style>
 
-<section class="app-band">
+<section class="app-band" data-anim>
   <div class="app-band-bg"></div>
   <div class="app-band-seam"></div>
   <div class="app-band-glow-bg"></div>
@@ -1076,7 +1076,7 @@
   @media(max-width:900px){.rev-grid{grid-template-columns:1fr 1fr}}
   @media(max-width:560px){.rev-grid{grid-template-columns:1fr}}
 </style>
-<section class="reviews-section" id="reviews">
+<section class="reviews-section" id="reviews" data-anim>
   <div class="wrap">
     <div class="reviews-head">
       <span class="chip"><svg width="13" height="13"><use href="#ic-signal"/></svg> Trusted by travellers</span>
@@ -1169,7 +1169,7 @@
   }
 </style>
 
-<section class="faq-new" id="faq">
+<section class="faq-new" id="faq" data-anim>
   <div class="wrap">
     <div class="faq-new-inner">
       <div class="faq-new-left">
@@ -1222,7 +1222,7 @@ document.querySelectorAll('.faq-new-btn').forEach(function(btn){
 </script>
 
 <!-- SUSTAINABILITY -->
-<section class="sust">
+<section class="sust" data-anim>
   <div class="wrap">
     <div class="sust-inner">
       <div class="sust-accent"><svg width="18" height="18"><use href="#ic-leaf"/></svg></div>
@@ -1244,7 +1244,7 @@ document.querySelectorAll('.faq-new-btn').forEach(function(btn){
 </section>
 
 <!-- CTA -->
-<section class="cta-section">
+<section class="cta-section" data-anim>
   <div class="wrap">
     <h2>Ready to travel better?</h2>
     <p>Join 50,000+ travellers who never overpay for data abroad. Three minutes to connected.</p>
@@ -1356,5 +1356,6 @@ function filterDests(val){
   });
 }
 </script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
