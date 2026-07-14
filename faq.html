@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — DataSafari Help Centre</title>
+  <meta name="description" content="Frequently asked questions about DataSafari eSIM. Getting started, plans, installation, compatibility, billing and troubleshooting.">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/redesign.css">
+  <style>
+    /* ─── FAQ PAGE ─── */
+    .faq-hero{padding:120px 0 60px;text-align:center;background:linear-gradient(160deg,var(--ink) 0%,#1a2040 55%,var(--wash) 100%)}
+    .faq-hero .chip{margin-bottom:16px}
+    .faq-hero h1{font-size:clamp(34px,4.5vw,56px);font-weight:800;color:#fff;letter-spacing:-1.5px;line-height:1.1;margin-bottom:16px}
+    .faq-hero h1 .hl{color:var(--ds-green)}
+    .faq-hero .lead{font-size:17px;color:rgba(255,255,255,.5);max-width:500px;margin:0 auto 36px}
+    .faq-hero-search{max-width:480px;margin:0 auto;position:relative}
+    .faq-hero-search input{width:100%;padding:16px 20px 16px 48px;border-radius:50px;border:none;font-size:15px;font-family:inherit;background:#fff;color:var(--ink);outline:none;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+    .faq-hero-search input:focus{box-shadow:0 8px 32px rgba(0,0,0,.2),0 0 0 3px rgba(1,219,93,.3)}
+    .faq-hero-search .ico{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+    .faq-trust-row{display:flex;justify-content:center;gap:36px;margin-top:40px;flex-wrap:wrap}
+    .faq-trust-item{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.5)}
+    .faq-trust-item svg{color:var(--ds-green)}
+    .faq-trust-item strong{color:#fff}
+
+    /* Category tabs */
+    .faq-cats{padding:32px 0 0;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:70px;z-index:100}
+    .faq-cats-inner{display:flex;gap:4px;overflow-x:auto;padding-bottom:0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .faq-cats-inner::-webkit-scrollbar{display:none}
+    .faq-cat-btn{padding:10px 20px;border:none;background:none;font-family:inherit;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;display:flex;align-items:center;gap:8px}
+    .faq-cat-btn:hover{color:var(--ink)}
+    .faq-cat-btn.active{color:var(--ds-green);border-bottom-color:var(--ds-green)}
+    .faq-cat-btn .cat-count{font-size:11px;background:var(--ds-green-dim);color:var(--ds-green);padding:2px 7px;border-radius:50px;font-weight:700}
+    .faq-cat-btn.active .cat-count{background:var(--ds-green);color:#fff}
+
+    /* Content */
+    .faq-content{padding:60px 0 80px;max-width:760px;margin:0 auto}
+    .faq-no-results{display:none;text-align:center;padding:60px 20px;color:var(--muted)}
+    .faq-no-results.show{display:block}
+    .faq-category{margin-bottom:52px}
+    .faq-category-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--line)}
+    .faq-category-head .cat-icon{width:36px;height:36px;border-radius:10px;background:var(--ds-green-dim);color:var(--ds-green);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .faq-category-head h2{font-size:20px;font-weight:700;color:var(--ink)}
+
+    .fq{border:1px solid var(--line);border-radius:12px;margin-bottom:8px;overflow:hidden;background:#fff;transition:border-color .2s}
+    .fq.open{border-color:var(--ds-green-bdr);box-shadow:0 4px 16px rgba(1,219,93,.08)}
+    .fq-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 22px;background:none;border:none;cursor:pointer;font-size:15px;font-weight:600;color:var(--ink);text-align:left;font-family:inherit;line-height:1.4;transition:color .2s;gap:16px}
+    .fq:hover .fq-btn{color:var(--ds-green)}
+    .fq.open .fq-btn{color:var(--ds-green)}
+    .fq-icon{display:flex;align-items:center;justify-content:center;width:22px;height:22px;flex-shrink:0;color:var(--muted);transition:transform .3s}
+    .fq.open .fq-icon{transform:rotate(45deg);color:var(--ds-green)}
+    .fq-ans{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1),padding .4s ease;padding:0 22px;font-size:14px;color:var(--body);line-height:1.75}
+    .fq.open .fq-ans{max-height:400px;padding:0 22px 20px}
+
+    /* Contact box */
+    .faq-contact{background:linear-gradient(135deg,var(--ink) 0%,#1a2040 100%);border-radius:20px;padding:48px;text-align:center;margin-top:60px;position:relative;overflow:hidden}
+    .faq-contact::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:var(--ds-green);opacity:.06}
+    .faq-contact h3{font-size:26px;font-weight:800;color:#fff;margin-bottom:8px;position:relative}
+    .faq-contact p{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:28px;max-width:420px;margin-left:auto;margin-right:auto;position:relative}
+    .faq-contact-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;position:relative}
+    .faq-contact-row .btn-chat{background:var(--ds-green);color:var(--ink)}
+    .faq-contact-row .btn-chat:hover{background:var(--ds-lime)}
+    .faq-contact-row .btn-sec{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12)}
+    .faq-contact-row .btn-sec:hover{background:rgba(255,255,255,.14)}
+    .faq-contact-stat{display:flex;justify-content:center;gap:40px;margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);flex-wrap:wrap;position:relative}
+    .faq-contact-stat-item .num{font-size:22px;font-weight:800;color:#fff}
+    .faq-contact-stat-item .lbl{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px}
+
+    @media(max-width:768px){
+      .faq-hero h1{font-size:30px}
+      .faq-cats{position:static}
+      .faq-content{padding:40px 0 60px}
+      .faq-contact{padding:32px 20px}
+      .faq-trust-row{gap:16px}
+    }
+  </style>
+</head>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="ic-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="ic-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="ic-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></symbol>
+  <symbol id="ic-sim" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="2" width="18" height="20" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></symbol>
+  <symbol id="ic-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></symbol>
+  <symbol id="ic-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="ic-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+  <symbol id="ic-refund" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></symbol>
+  <symbol id="ic-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="ic-support" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></symbol>
+  <symbol id="ic-star" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="ic-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+  <symbol id="ic-arrow-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  <symbol id="ic-esim" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="7" y1="15" x2="7.01" y2="15"/><line x1="11" y1="15" x2="13" y2="15"/></symbol>
+  <symbol id="ic-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+  <symbol id="ic-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+</svg>
+
+<body>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/icons/datasafari-logo.png" alt="DataSafari logo"></a>
+    <div class="nav-links">
+      <a href="how-it-works.html">How it works</a>
+      <a href="coverage.html">Coverage</a>
+      <a href="index.html#plans">Plans</a>
+      <a href="faq.html" style="color:var(--ds-green)">FAQ</a>
+      <a href="index.html#reviews">Reviews</a>
+    </div>
+    <div class="nav-right">
+      <a href="index.html#plans" class="btn btn-outline btn-sm">Sign in</a>
+      <a href="index.html#plans" class="btn btn-green btn-sm">Get eSIM</a>
+    </div>
+    <button class="nav-burger" id="burger"><span id="burger-icon"><svg width="22" height="22"><use href="#ic-menu"/></svg></span></button>
+  </div>
+</nav>
+<div class="m-nav" id="mnav">
+  <a href="how-it-works.html">How it works</a>
+  <a href="coverage.html">Coverage</a>
+  <a href="index.html#plans">Plans</a>
+  <a href="faq.html">FAQ</a>
+  <a href="index.html#reviews">Reviews</a>
+  <a href="#" class="btn btn-outline">Sign in</a>
+  <a href="index.html#plans" class="btn btn-green">Get eSIM</a>
+</div>
+
+<!-- HERO -->
+<section class="faq-hero">
+  <div class="wrap">
+    <span class="chip chip-inv"><svg width="13" height="13"><use href="#ic-help"/></svg> Help Centre</span>
+    <h1>Got questions?<br>We have <span class="hl">answers.</span></h1>
+    <p class="lead">Everything you need to know about DataSafari eSIM, all in one place. Search or browse by topic.</p>
+    <div class="faq-hero-search">
+      <svg class="ico" width="18" height="18"><use href="#ic-search"/></svg>
+      <input type="text" id="faqSearch" placeholder="Search questions…" autocomplete="off" aria-label="Search FAQ">
+    </div>
+    <div class="faq-trust-row">
+      <div class="faq-trust-item"><svg width="16" height="16"><use href="#ic-star"/></svg><svg width="16" height="16"><use href="#ic-star"/></svg><svg width="16" height="16"><use href="#ic-star"/></svg><svg width="16" height="16"><use href="#ic-star"/></svg><svg width="16" height="16"><use href="#ic-star"/></svg> <strong>4.9/5</strong> on Trustpilot</div>
+      <div class="faq-trust-item"><svg width="15" height="15"><use href="#ic-chat"/></svg> <strong>2 min</strong> avg. reply time</div>
+      <div class="faq-trust-item"><svg width="15" height="15"><use href="#ic-support"/></svg> <strong>24/7</strong> live support</div>
+      <div class="faq-trust-item"><svg width="15" height="15"><use href="#ic-shield"/></svg> <strong>Money-back</strong> guarantee</div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY TABS -->
+<div class="faq-cats">
+  <div class="wrap">
+    <div class="faq-cats-inner" id="faqCats" role="tablist">
+      <button class="faq-cat-btn active" data-cat="all" role="tab" aria-selected="true">All <span class="cat-count">30</span></button>
+      <button class="faq-cat-btn" data-cat="getting-started" role="tab"><svg width="14" height="14" style="color:var(--ds-green)"><use href="#ic-zap"/></svg> Getting Started <span class="cat-count">5</span></button>
+      <button class="faq-cat-btn" data-cat="plans" role="tab"><svg width="14" height="14" style="color:var(--ds-green)"><use href="#ic-tag"/></svg> Plans &amp; Pricing <span class="cat-count">5</span></button>
+      <button class="faq-cat-btn" data-cat="installation" role="tab"><svg width="14" height="14" style="color:var(--ds-green)"><use href="#ic-sim"/></svg> Installation <span class="cat-count">5</span></button>
+      <button class="faq-cat-btn" data-cat="compatibility" role="tab"><svg width="14" height="14" style="color:var(--ds-green)"><use href="#ic-phone"/></svg> Compatibility <span class="cat-count">5</span></button>
+      <button class="faq-cat-btn" data-cat="billing" role="tab"><svg width="14" height="14" style="color:var(--ds-green)"><use href="#ic-refund"/></svg> Billing &amp; Refunds <span class="cat-count">4</span></button>
+      <button class="faq-cat-btn" data-cat="troubleshooting" role="tab"><svg width="14" height="14" style="color:var(--ds-green)"><use href="#ic-wrench"/></svg> Troubleshooting <span class="cat-count">5</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ CONTENT -->
+<section>
+  <div class="wrap">
+    <div class="faq-content" id="faqContent">
+      <div class="faq-no-results" id="faqNoResults">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 12px;color:var(--line)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <p style="font-size:15px">No questions match your search. Try a different term or <a href="faq.html" style="color:var(--ds-green)">browse all</a>.</p>
+      </div>
+
+      <!-- GETTING STARTED -->
+      <div class="faq-category" id="faq-getting-started" data-category="getting-started">
+        <div class="faq-category-head">
+          <div class="cat-icon"><svg width="16" height="16"><use href="#ic-zap"/></svg></div>
+          <h2>Getting Started</h2>
+        </div>
+        <div class="fq"><button class="fq-btn">What exactly is an eSIM?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">An eSIM is a digital SIM built directly into your phone during manufacturing. Instead of inserting a physical plastic card, you scan a QR code or enter an activation code to install a data plan. DataSafari emails you the QR instantly after purchase — no store visit, no waiting, no plastic.</div></div>
+        <div class="fq"><button class="fq-btn">How is DataSafari different from my carrier roaming?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Carrier roaming charges $15–$45 per day for data in most countries. DataSafari starts from $3 for 7 days. We buy data wholesale from local networks in 200+ countries and pass the savings on to you. Same networks, same speeds — up to 85% less cost.</div></div>
+        <div class="fq"><button class="fq-btn">Do I need to download an app?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">No app is required. The QR code works directly through your phone's built-in Settings. We do offer a companion app for managing plans and top-ups, but it's entirely optional. The eSIM works the same either way.</div></div>
+        <div class="fq"><button class="fq-btn">How long does it take to set up?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Around 2 minutes from opening the email to having a working eSIM profile installed. Scan the QR, tap a few confirmations, and it's done. Most travellers set it up at the gate before their flight boards.</div></div>
+        <div class="fq"><button class="fq-btn">Can I buy DataSafari for someone else?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Yes. Buy a plan and forward the QR email to anyone. The eSIM activates on their phone when they install it and connect in the destination country. It's a great travel gift.</div></div>
+      </div>
+
+      <!-- PLANS & PRICING -->
+      <div class="faq-category" id="faq-plans" data-category="plans">
+        <div class="faq-category-head">
+          <div class="cat-icon"><svg width="16" height="16"><use href="#ic-tag"/></svg></div>
+          <h2>Plans &amp; Pricing</h2>
+        </div>
+        <div class="fq"><button class="fq-btn">What plan types are available?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Three tiers: Country plans from $3 for a single destination, Regional bundles from $9 covering entire continents (Europe, Asia, Americas, Middle East, Africa, Oceania), and Global plans from $19 working across all 200+ countries. Each tier comes in multiple data sizes from 1 GB to Unlimited.</div></div>
+        <div class="fq"><button class="fq-btn">When does my plan validity start?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Validity starts on your first data connection in the destination country — not at the time of purchase, and not when you install the eSIM. You can buy in advance weeks ahead without wasting any days of your plan.</div></div>
+        <div class="fq"><button class="fq-btn">What happens when I run out of data?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">You'll receive a notification before hitting your limit. Top up instantly from the website or app — additional data credits apply to your existing eSIM immediately. No reinstallation, no new QR code, no interruption.</div></div>
+        <div class="fq"><button class="fq-btn">Can I extend my plan if my trip gets longer?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Yes. Buy a new plan or top up from your account dashboard while you're still in-country. The new plan applies to your existing eSIM profile instantly. No need to reinstall anything.</div></div>
+        <div class="fq"><button class="fq-btn">Is there a contract or subscription?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">No contract, no auto-renew, no monthly bills. Every DataSafari plan is a one-off purchase. You only pay when you travel. Nothing continues after your plan expires unless you explicitly buy more.</div></div>
+      </div>
+
+      <!-- INSTALLATION -->
+      <div class="faq-category" id="faq-installation" data-category="installation">
+        <div class="faq-category-head">
+          <div class="cat-icon"><svg width="16" height="16"><use href="#ic-sim"/></svg></div>
+          <h2>Installation</h2>
+        </div>
+        <div class="fq"><button class="fq-btn">How do I install the eSIM on my iPhone?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Open Settings → Mobile Data (or Cellular) → Add eSIM → Use QR Code. Point your camera at the QR from your DataSafari email. Tap Continue, name your plan (e.g. "DataSafari"), set it as your data line, and enable Data Roaming. Takes under 2 minutes.</div></div>
+        <div class="fq"><button class="fq-btn">How do I install on Android or Samsung?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Open Settings → Connections → SIM Card Manager → Add eSIM. Tap "Scan QR code from carrier" and point at your QR email. On Pixel devices, go to Settings → Network &amp; Internet → SIMs → Add SIM. Follow the prompts, set DataSafari as the default data line, and enable Data Roaming.</div></div>
+        <div class="fq"><button class="fq-btn">What if the QR code won't scan?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Every email includes a manual activation code (SM-DP+ address + activation code) you can type in instead. Go to the same Add eSIM screen and choose "Enter details manually". You can also contact our 24/7 support and we'll resend the QR instantly.</div></div>
+        <div class="fq"><button class="fq-btn">Should I install before I travel or when I land?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Always install before you travel, while you have reliable Wi-Fi at home. The profile installs and sits dormant. Validity only begins when your phone first connects to a local network in your destination. You won't lose any plan days by installing early.</div></div>
+        <div class="fq"><button class="fq-btn">Can I install the same eSIM on multiple devices?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Each eSIM plan is tied to one device. If you need connectivity on multiple devices (phone + tablet), you'll need a separate plan for each. Most plans include hotspot tethering, so you can share your phone's data connection to other devices.</div></div>
+      </div>
+
+      <!-- COMPATIBILITY -->
+      <div class="faq-category" id="faq-compatibility" data-category="compatibility">
+        <div class="faq-category-head">
+          <div class="cat-icon"><svg width="16" height="16"><use href="#ic-phone"/></svg></div>
+          <h2>Compatibility</h2>
+        </div>
+        <div class="fq"><button class="fq-btn">How do I check if my phone supports eSIM?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Dial *#06# on your phone. If an EID number appears in the result, your device is eSIM-capable. You can also check Settings → Mobile Data or SIM Manager — if you see "Add eSIM" or similar, you're compatible. Most smartphones released from 2018 onwards support eSIM.</div></div>
+        <div class="fq"><button class="fq-btn">Can I keep my home SIM active at the same time?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Absolutely. DataSafari runs on your eSIM slot for data while your physical SIM continues to handle calls and texts from your regular number. Both work simultaneously. You can call and text on your home number while browsing on DataSafari data.</div></div>
+        <div class="fq"><button class="fq-btn">Will it work on a carrier-locked phone?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">If your phone is carrier-locked, the eSIM slot may be restricted to your home carrier's profiles only. DataSafari is unlikely to activate on a locked device. Contact your carrier to unlock — most carriers offer free unlocks after your contract period ends.</div></div>
+        <div class="fq"><button class="fq-btn">Does it work on iPad or tablets?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Yes, for eSIM-capable tablets. Compatible iPads include iPad Pro 2018+, iPad Air 2019+, iPad mini 5th gen+, and iPad 7th gen+. Installation steps are identical — go to Settings → Mobile Data → Add eSIM and scan the QR code.</div></div>
+        <div class="fq"><button class="fq-btn">Can I use DataSafari on a laptop?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">If your laptop has eSIM hardware (some Windows devices and certain MacBooks), yes. Otherwise use the hotspot feature from your phone after installing DataSafari — enable Personal Hotspot (iPhone) or Mobile Hotspot (Android) and connect your laptop via Wi-Fi.</div></div>
+      </div>
+
+      <!-- BILLING -->
+      <div class="faq-category" id="faq-billing" data-category="billing">
+        <div class="faq-category-head">
+          <div class="cat-icon"><svg width="16" height="16"><use href="#ic-refund"/></svg></div>
+          <h2>Billing &amp; Refunds</h2>
+        </div>
+        <div class="fq"><button class="fq-btn">What payment methods do you accept?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">We accept Visa, Mastercard, American Express, Apple Pay, Google Pay, and major debit cards. All payments are processed securely via our payment partners. We never store full card details on our servers.</div></div>
+        <div class="fq"><button class="fq-btn">Do you offer refunds?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Yes. If your eSIM has not been activated (not yet connected to a network in your destination), you're eligible for a full refund. Contact support via chat, email, or WhatsApp with your order number. Refunds are processed within 5 business days to your original payment method.</div></div>
+        <div class="fq"><button class="fq-btn">Can I cancel my plan after purchase?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Yes, as long as the eSIM hasn't been activated in a destination network. Cancel from your account dashboard or contact support. Activation is tracked on our end — once connected abroad, the plan is considered used and refunds may not apply.</div></div>
+        <div class="fq"><button class="fq-btn">Are there any hidden fees?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">None. The price shown at checkout is the final price you pay. No activation fees, no connection charges, no surprise roaming bills. Tax is included where applicable. That's it.</div></div>
+      </div>
+
+      <!-- TROUBLESHOOTING -->
+      <div class="faq-category" id="faq-troubleshooting" data-category="troubleshooting">
+        <div class="faq-category-head">
+          <div class="cat-icon"><svg width="16" height="16"><use href="#ic-wrench"/></svg></div>
+          <h2>Troubleshooting</h2>
+        </div>
+        <div class="fq"><button class="fq-btn">Data isn't working after I landed. What should I check?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Check these in order: 1) Data Roaming is ON for the DataSafari eSIM line (not just your home SIM). 2) DataSafari is set as the default for mobile data. 3) Toggle Airplane Mode on and off and wait 30 seconds. 4) Manually select a local network under Mobile Data → Network Selection. Still stuck? Chat our 24/7 support.</div></div>
+        <div class="fq"><button class="fq-btn">My phone shows "No Service" after installing<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">This is normal if you haven't landed yet — the plan sits dormant until you arrive in the destination country. If you're already in-country, go to Mobile Data → Network Selection → Manual, wait for the network list to load, and select a local operator. Then restart your phone.</div></div>
+        <div class="fq"><button class="fq-btn">I accidentally deleted my eSIM profile<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Contact support with your order number immediately. If the eSIM hasn't been activated yet, we can resend the original QR. If it's been activated, you may need a replacement plan — contact us and we'll help find the best solution.</div></div>
+        <div class="fq"><button class="fq-btn">Data speeds feel slower than expected<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">DataSafari connects to local 4G/LTE and 5G networks where available. Speeds vary by location, network congestion, and your device's frequency band support. Try moving to a different location, toggling Airplane Mode, or manually switching to a different local network operator in Settings.</div></div>
+        <div class="fq"><button class="fq-btn">My plan expired mid-trip. What now?<div class="fq-icon"><svg width="14" height="14"><use href="#ic-plus"/></svg></div></button><div class="fq-ans">Buy a new plan or top up instantly from your account dashboard — even while abroad on Wi-Fi. The new plan activates on your existing eSIM profile immediately with no reinstallation required. Unused data from expired plans unfortunately cannot be rolled over.</div></div>
+      </div>
+
+      <!-- CONTACT BOX -->
+      <div class="faq-contact">
+        <h3>Still need help?</h3>
+        <p>Our support team is available 24/7 via live chat, email, and WhatsApp. Average reply time under 2 minutes.</p>
+        <div class="faq-contact-row">
+          <a href="#" class="btn btn-chat"><svg width="16" height="16"><use href="#ic-chat"/></svg> Live Chat</a>
+          <a href="#" class="btn btn-sec"><svg width="16" height="16"><use href="#ic-support"/></svg> Email Support</a>
+          <a href="#" class="btn btn-sec"><svg width="16" height="16"><use href="#ic-phone"/></svg> WhatsApp</a>
+        </div>
+        <div class="faq-contact-stat">
+          <div class="faq-contact-stat-item"><div class="num">50,000+</div><div class="lbl">Happy travellers</div></div>
+          <div class="faq-contact-stat-item"><div class="num">4.9★</div><div class="lbl">Trustpilot rating</div></div>
+          <div class="faq-contact-stat-item"><div class="num">&lt;2 min</div><div class="lbl">Avg. reply time</div></div>
+          <div class="faq-contact-stat-item"><div class="num">24/7</div><div class="lbl">Support hours</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand-col">
+        <div class="fb-logo"><img src="assets/icons/datasafari-logo.png" alt="DataSafari"></div>
+        <p>Global eSIM connectivity for modern travellers. Fast, affordable data in 200+ countries.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="X" class="soc-btn"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.844L1.254 2.25H8.08l4.26 5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" aria-label="Instagram" class="soc-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" aria-label="Facebook" class="soc-btn"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-newsletter">
+        <h4>Travel tips and deals</h4>
+        <p>Get eSIM deals and travel connectivity tips straight to your inbox.</p>
+        <form class="nl-form" onsubmit="return false">
+          <input type="email" placeholder="your@email.com" class="nl-input" aria-label="Email address">
+          <button type="submit" class="nl-btn">Subscribe</button>
+        </form>
+        <p class="nl-note">No spam. Unsubscribe anytime.</p>
+      </div>
+    </div>
+    <div class="footer-links">
+      <div class="fc"><h4>Product</h4><ul><li><a href="index.html#plans">Browse Plans</a></li><li><a href="coverage.html">Coverage Map</a></li><li><a href="how-it-works.html">eSIM Setup Guide</a></li><li><a href="how-it-works.html#compat">Device Compatibility</a></li></ul></div>
+      <div class="fc"><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Blog</a></li><li><a href="#">Affiliates</a></li></ul></div>
+      <div class="fc"><h4>Support</h4><ul><li><a href="faq.html">Help Centre</a></li><li><a href="#">Live Chat</a></li><li><a href="#">WhatsApp</a></li></ul></div>
+      <div class="fc"><h4>Legal</h4><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="refund.html">Refund Policy</a></li><li><a href="cookies.html">Cookie Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 DataSafari Ltd. All rights reserved.</p><div class="footer-bottom-badges"><span class="trust-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Secure checkout</span><span class="trust-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Money-back guarantee</span></div></div>
+  </div>
+</footer>
+
+<script>
+// Nav
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',window.scrollY>10),{passive:true});
+nav.classList.toggle('solid',window.scrollY>10);
+const burger=document.getElementById('burger'),burgerIcon=document.getElementById('burger-icon'),mnav=document.getElementById('mnav');
+burger.addEventListener('click',()=>{const open=mnav.classList.toggle('show');burgerIcon.innerHTML=open?'<svg width="22" height="22"><use href="#ic-close"/></svg>':'<svg width="22" height="22"><use href="#ic-menu"/></svg>';document.body.style.overflow=open?'hidden':'';});
+mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mnav.classList.remove('show');burgerIcon.innerHTML='<svg width="22" height="22"><use href="#ic-menu"/></svg>';document.body.style.overflow='';}));
+
+// FAQ accordion
+document.querySelectorAll('.fq-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  const item=btn.closest('.fq'),isOpen=item.classList.contains('open');
+  document.querySelectorAll('.fq.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}));
+
+// Category filter
+const catBtns=document.querySelectorAll('.faq-cat-btn');
+const categories=document.querySelectorAll('.faq-category');
+catBtns.forEach(btn=>btn.addEventListener('click',()=>{
+  catBtns.forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false');});
+  btn.classList.add('active');btn.setAttribute('aria-selected','true');
+  const cat=btn.dataset.cat;
+  categories.forEach(c=>{
+    c.style.display=(cat==='all'||c.dataset.category===cat)?'':'none';
+  });
+  document.getElementById('faqSearch').value='';
+  document.getElementById('faqNoResults').classList.remove('show');
+}));
+
+// Search
+document.getElementById('faqSearch').addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  if(!q){
+    categories.forEach(c=>c.style.display='');
+    document.querySelectorAll('.fq').forEach(f=>f.style.display='');
+    document.getElementById('faqNoResults').classList.remove('show');
+    catBtns.forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false');});
+    catBtns[0].classList.add('active');catBtns[0].setAttribute('aria-selected','true');
+    return;
+  }
+  catBtns.forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false');});
+  let found=false;
+  categories.forEach(cat=>{
+    cat.style.display='';
+    let catHasResult=false;
+    cat.querySelectorAll('.fq').forEach(fq=>{
+      const txt=(fq.querySelector('.fq-btn').textContent+fq.querySelector('.fq-ans').textContent).toLowerCase();
+      const match=txt.includes(q);
+      fq.style.display=match?'':'none';
+      if(match){catHasResult=true;found=true;}
+    });
+    cat.style.display=catHasResult?'':'none';
+  });
+  document.getElementById('faqNoResults').classList.toggle('show',!found);
+});
+</script>
+</body>
+</html>
