@@ -43,7 +43,7 @@ export function Footer() {
       <div className="wrap py-16">
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1.2fr] gap-12 pb-10 border-b border-white/6">
           <div>
-            <img src="/assets/icons/datasafari-logo.svg" alt="DataSafari" className="h-7 mb-3.5" />
+            <img src="/assets/icons/datasafari-logo.png" alt="DataSafari" className="h-7 mb-3.5" />
             <p className="text-sm text-white/50 leading-relaxed max-w-xs mb-5">
               Global eSIM connectivity for modern travellers. Fast, affordable data in 200+ countries.
             </p>
