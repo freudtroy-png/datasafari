@@ -32,13 +32,7 @@ const steps = [
 ]
 
 export function HowItWorks() {
-  const [deviceSearch, setDeviceSearch] = useState('')
   const [installTab, setInstallTab] = useState<'iphone' | 'android'>('iphone')
-
-  const filteredDevices = devices.filter(d =>
-    d.name.toLowerCase().includes(deviceSearch.toLowerCase()) ||
-    d.models.toLowerCase().includes(deviceSearch.toLowerCase())
-  )
 
   return (
     <>
@@ -155,56 +149,43 @@ export function HowItWorks() {
       </section>
 
       {/* ─── DEVICE COMPATIBILITY ─── */}
-      <section id="devices" className="py-24 md:py-32 overflow-hidden relative">
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1a1a2e 100%)' }} />
-        <div className="absolute top-1/3 right-0 w-[400px] h-[400px] rounded-full bg-ds-green opacity-[0.03] blur-[100px]" />
-        <div className="wrap relative z-10">
-          <motion.div {...fadeUp()} className="text-center max-w-[600px] mx-auto mb-12">
-            <Badge variant="invert"><Smartphone size={13} /> Compatible devices</Badge>
-            <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-white leading-[1.12] mt-3 mb-3">
+      <section id="devices" className="py-24 md:py-32 bg-white">
+        <div className="wrap">
+          <motion.div {...fadeUp()} className="text-center max-w-[600px] mx-auto mb-14">
+            <Badge><Smartphone size={13} /> Compatible devices</Badge>
+            <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-ds-ink leading-[1.12] mt-3 mb-3">
               Works with almost every modern phone.
             </h2>
-            <p className="text-white/45 leading-relaxed">Most phones from 2019 onwards support eSIM. If your phone has an EID number, you are good to go. Dial <span className="text-ds-green font-mono">*#06#</span> to check.</p>
+            <p className="text-ds-muted leading-relaxed">Most phones from 2019 onwards support eSIM. If your phone has an EID number, you are good to go. Dial <span className="text-ds-green font-mono font-semibold">*#06#</span> to check.</p>
           </motion.div>
 
-          <motion.div {...fadeUp(0.1)} className="max-w-[400px] mx-auto mb-10">
-            <div className="relative">
-              <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none" />
-              <input
-                type="text"
-                placeholder="Search your device..."
-                value={deviceSearch}
-                onChange={(e) => setDeviceSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-white/6 border border-white/10 rounded-r2 text-sm text-white outline-none focus:border-ds-green/50 transition-colors placeholder:text-white/25 font-sans"
-              />
-            </div>
-          </motion.div>
-
-          <motion.div {...fadeUp(0.2)} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 max-w-[800px] mx-auto">
-            {filteredDevices.map((d, i) => (
-              <motion.div
-                key={d.name}
-                className="relative group cursor-default"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.04, duration: 0.4, ease }}
-                whileHover={{ y: -4 }}
-              >
-                <div className="bg-white/[0.04] border border-white/[0.07] rounded-2xl p-4 transition-all duration-300 group-hover:bg-white/[0.08] group-hover:border-ds-green/30 text-center h-full">
-                  <div className="w-10 h-10 rounded-xl mx-auto mb-3 flex items-center justify-center text-xs font-bold tracking-tight" style={{ background: `${d.color}20`, color: d.color }}>
+          <div className="max-w-[800px] mx-auto">
+            <motion.div {...fadeUp(0.1)} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+              {devices.map((d, i) => (
+                <motion.div
+                  key={d.name}
+                  className="text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ delay: i * 0.04, duration: 0.4, ease }}
+                >
+                  <div className="w-12 h-12 rounded-2xl mx-auto mb-3 flex items-center justify-center text-sm font-bold" style={{ background: `${d.color}10`, color: d.color }}>
                     {d.name.slice(0, 2).toUpperCase()}
                   </div>
-                  <h3 className="text-sm font-bold text-white mb-0.5">{d.name}</h3>
-                  <p className="text-[10px] text-white/35 leading-relaxed">{d.models}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                  <p className="text-sm font-semibold text-ds-ink mb-0.5">{d.name}</p>
+                  <p className="text-[11px] text-ds-muted/60 leading-snug">{d.models}</p>
+                </motion.div>
+              ))}
+            </motion.div>
 
-          {filteredDevices.length === 0 && (
-            <motion.p {...fadeUp()} className="text-center text-white/40 text-sm mt-4">No matches found. Try a different search.</motion.p>
-          )}
+            <motion.div {...fadeUp(0.2)} className="mt-12 text-center">
+              <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-ds-wash text-ds-muted text-sm">
+                <Search size={15} className="text-ds-muted/60" />
+                <span>Not sure? Dial <span className="text-ds-green font-mono font-semibold">*#06#</span> to check for an EID number</span>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
