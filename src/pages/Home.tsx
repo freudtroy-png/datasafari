@@ -79,15 +79,15 @@ export function Home() {
             </p>
           </motion.div>
           <motion.div {...fadeUp} transition={{ delay: 0.1, duration: 0.6, ease }}>
-            <div className="flex max-w-[520px] mx-auto bg-white/12 backdrop-blur-xl border border-white/15 rounded-full p-1.5 mb-8">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 max-w-[520px] mx-auto sm:bg-white/12 sm:backdrop-blur-xl sm:border sm:border-white/15 sm:rounded-full sm:p-1.5 mb-8">
               <input
                 type="text"
                 placeholder="Search your destination..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 bg-transparent border-none px-5 py-2.5 text-sm text-white outline-none placeholder:text-white/40 font-sans"
+                className="flex-1 bg-white/12 backdrop-blur-xl border border-white/15 rounded-full px-5 py-3 sm:bg-transparent sm:border-none sm:py-2.5 text-sm text-white outline-none placeholder:text-white/40 font-sans"
               />
-              <Button variant="primary" size="default" className="rounded-full shrink-0">
+              <Button variant="primary" className="rounded-full w-full sm:w-auto">
                 <Search size={14} /> Search plans
               </Button>
             </div>
