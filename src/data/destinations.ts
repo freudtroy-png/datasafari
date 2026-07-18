@@ -25,6 +25,8 @@ export const destinations: Destination[] = [
   { code: 'MX', name: 'Mexico', speed: '4G', price: 'from $3', img: '/assets/destinations/mexico.jpg' },
   { code: 'EG', name: 'Egypt', speed: '4G', price: 'from $4', img: '/assets/destinations/egypt.jpg' },
   { code: 'ZA', name: 'South Africa', speed: '4G', price: 'from $4', img: '/assets/destinations/southafrica.jpg' },
+  { code: 'KE', name: 'Kenya', speed: '4G', price: 'from $4', img: '/assets/destinations/kenya.jpg' },
+  { code: 'TZ', name: 'Tanzania', speed: '4G', price: 'from $4', img: '/assets/destinations/tanzania.jpg' },
 ]
 
 export const regions = ['All', 'Europe', 'Asia', 'Americas', 'Africa', 'Middle East', 'Oceania'] as const
@@ -33,7 +35,7 @@ export const regionMap: Record<string, string[]> = {
   Europe: ['GB', 'FR', 'IT', 'DE', 'ES'],
   Asia: ['JP', 'KR', 'TH', 'IN', 'SG'],
   Americas: ['US', 'CA', 'BR', 'MX'],
-  Africa: ['ZA', 'EG'],
+  Africa: ['ZA', 'EG', 'KE', 'TZ'],
   'Middle East': ['AE'],
   Oceania: ['AU'],
 }
