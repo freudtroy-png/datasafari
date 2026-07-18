@@ -262,7 +262,7 @@ export function Home() {
       </section>
 
       {/* PLANS — restored to original HTML look */}
-      <section id="plans" className="py-20 md:py-24 overflow-hidden" style={{ background: '#0f172a' }}>
+      <section id="plans" className="py-20 md:py-24 relative overflow-hidden" style={{ background: '#0f172a' }}>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full pointer-events-none opacity-[0.05]" style={{ background: 'radial-gradient(circle, #01db5d 0%, transparent 65%)' }} />
         <div className="wrap relative z-10">
           <motion.div {...fadeUp} className="text-center max-w-[640px] mx-auto mb-8">
