@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { Search, Wifi, Zap, Shield, Globe, HeadphonesIcon, ThumbsUp, Star, Download, Leaf, ArrowRight, HelpCircle, Signal, Tag, Clock } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -35,6 +35,30 @@ const testimonials = [
   { name: 'Henrik Larsson', role: 'Travel blogger', text: '45 seconds to install, instant activation on landing. Best travel purchase I made all year.', img: '/assets/testimonials/person6.jpg' },
 ]
 
+
+function AnimatedNumber({ target, suffix = '' }: { target: number; suffix?: string }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true })
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!inView) return
+    let current = 0
+    const increment = target / 60
+    const timer = setInterval(() => {
+      current += increment
+      if (current >= target) {
+        setCount(target)
+        clearInterval(timer)
+      } else {
+        setCount(Math.floor(current))
+      }
+    }, 16)
+    return () => clearInterval(timer)
+  }, [inView, target])
+
+  return <span ref={ref}>{count}{suffix}</span>
+}
 
 export function Home() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -247,17 +271,25 @@ export function Home() {
               Built for travellers, by people who travel.
             </h2>
           </motion.div>
-          <motion.div {...fadeUp} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {features.map((f) => (
-              <Card key={f.title} className="p-6 hover:border-ds-green/30 hover:shadow-md hover:-translate-y-0.5 transition-all">
-                <div className="w-11 h-11 rounded-r bg-ds-green/10 text-ds-green flex items-center justify-center mb-4">
-                  <f.icon size={20} />
-                </div>
-                <h3 className="text-base font-bold text-ds-ink mb-1.5">{f.title}</h3>
-                <p className="text-sm text-ds-muted leading-relaxed">{f.desc}</p>
-              </Card>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {features.map((f, i) => (
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.6, ease, delay: i * 0.08 }}
+              >
+                <Card className="p-6 hover:border-ds-green/30 hover:shadow-md hover:-translate-y-0.5 transition-all">
+                  <div className="w-11 h-11 rounded-r bg-ds-green/10 text-ds-green flex items-center justify-center mb-4">
+                    <f.icon size={20} />
+                  </div>
+                  <h3 className="text-base font-bold text-ds-ink mb-1.5">{f.title}</h3>
+                  <p className="text-sm text-ds-muted leading-relaxed">{f.desc}</p>
+                </Card>
+              </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -298,12 +330,16 @@ export function Home() {
           </motion.div>
 
           {/* Cards */}
-          <motion.div {...fadeUp} className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-[900px] mx-auto">
-            {plans.map((plan) => {
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-[900px] mx-auto">
+            {plans.map((plan, i) => {
               const p = plan[activePlan]
               return (
-                <div
+                <motion.div
                   key={plan.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.6, ease, delay: i * 0.12 }}
                   className={`relative flex flex-col rounded-[20px] p-5 sm:p-7 pt-6 sm:pt-8 transition-all duration-250 ${
                     plan.popular
                       ? 'bg-ds-green border-ds-green shadow-[0_20px_60px_rgba(1,219,93,.25)]'
@@ -366,10 +402,10 @@ export function Home() {
                       </div>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               )
             })}
-          </motion.div>
+          </div>
 
           {/* Trust strip */}
           <motion.div {...fadeUp} className="flex items-center justify-center gap-7 mt-8 flex-wrap">
@@ -399,10 +435,14 @@ export function Home() {
             <p className="text-ds-muted leading-relaxed">Real travellers, real connections. From backpackers to business flyers.</p>
           </motion.div>
 
-          <motion.div {...fadeUp} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
-            {testimonials.map((t) => (
-              <div
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+            {testimonials.map((t, i) => (
+              <motion.div
                 key={t.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.6, ease, delay: i * 0.08 }}
                 className="border border-ds-line rounded-[20px] overflow-hidden bg-white flex flex-col h-full transition-all duration-250 hover:shadow-[0_10px_36px_rgba(15,23,42,.1)] hover:-translate-y-[3px] group"
               >
                 {/* Photo area (4:3 ratio) */}
@@ -419,9 +459,9 @@ export function Home() {
                     <strong className="text-ds-ink">{t.name}</strong><span className="text-ds-muted"> &middot; {t.role}</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -484,7 +524,7 @@ export function Home() {
               </div>
               <div className="w-12 sm:w-[1px] h-[1px] sm:h-[60px] bg-white/8" />
               <div>
-                <div className="text-[clamp(40px,10vw,56px)] font-extrabold text-ds-green tracking-tighter leading-none">85%</div>
+                <div className="text-[clamp(40px,10vw,56px)] font-extrabold text-ds-green tracking-tighter leading-none"><AnimatedNumber target={85} suffix="%" /></div>
                 <div className="text-[11px] sm:text-xs text-white/40 mt-2 leading-relaxed">lower emissions than physical<br />SIM, cradle to grave.</div>
               </div>
             </div>
