@@ -218,7 +218,7 @@ export function Legal({ title }: LegalProps) {
 
   return (
     <>
-      <section className="pt-32 pb-12 bg-ds-ink text-white">
+      <section className="pt-24 sm:pt-32 pb-12 bg-ds-ink text-white">
         <div className="wrap">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

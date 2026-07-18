@@ -26,7 +26,7 @@ export function FAQ() {
 
   return (
     <>
-      <section className="pt-32 pb-16 bg-ds-ink text-white">
+      <section className="pt-24 sm:pt-32 pb-16 bg-ds-ink text-white">
         <div className="wrap">
           <motion.div {...fadeUp} className="text-center max-w-[640px] mx-auto">
             <Badge variant="invert"><HeadphonesIcon size={13} /> Help Center</Badge>

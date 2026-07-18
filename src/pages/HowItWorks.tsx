@@ -48,7 +48,7 @@ export function HowItWorks() {
           </svg>
         </div>
 
-        <div className="wrap relative z-10 pt-28 pb-16">
+        <div className="wrap relative z-10 pt-24 sm:pt-28 pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, ease }}>
               <Badge variant="invert" className="mb-5"><Wifi size={13} /> eSIM setup guide</Badge>
