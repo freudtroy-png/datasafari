@@ -206,14 +206,14 @@ export function Home() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section id="how-it-works" className="py-20 md:py-24 bg-white">
+      <section id="how-it-works" className="py-20 md:py-24 text-white" style={{ background: '#0f172a' }}>
         <div className="wrap">
           <motion.div {...fadeUp} className="text-center max-w-[560px] mx-auto mb-10 sm:mb-14">
-            <Badge><Download size={13} /> Simple setup</Badge>
-            <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-ds-ink leading-[1.12] mt-3 mb-3">
+            <Badge variant="invert"><Download size={13} /> Simple setup</Badge>
+            <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-white leading-[1.12] mt-3 mb-3">
               Connected in <span className="text-ds-green">3 minutes</span><span className="text-white"> flat</span>.
             </h2>
-            <p className="text-ds-muted leading-relaxed">Make it white.</p>
+            <p className="text-white/40 leading-relaxed">No queues, no paperwork, no physical SIM card needed.</p>
           </motion.div>
           <div className="max-w-[600px] mx-auto">
             {[
@@ -225,12 +225,12 @@ export function Home() {
                 key={step.num}
                 {...fadeUp}
                 transition={{ delay: i * 0.1, duration: 0.5, ease }}
-                className="flex gap-5 py-6 border-t border-ds-line first:border-t-0 first:pt-0 last:pb-0"
+                className="flex gap-5 py-6 border-t border-white/[0.08] first:border-t-0 first:pt-0 last:pb-0"
               >
                 <span className="text-xs font-bold text-ds-green w-8 shrink-0 pt-0.5 tracking-wide">{step.num}</span>
                 <div>
-                  <h3 className="text-lg font-bold text-ds-ink mb-1.5">{step.title}</h3>
-                  <p className="text-sm text-ds-muted leading-relaxed">{step.desc}</p>
+                  <h3 className="text-lg font-bold text-white mb-1.5">{step.title}</h3>
+                  <p className="text-sm text-white/50 leading-relaxed">{step.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -318,11 +318,11 @@ export function Home() {
                     </div>
                   )}
 
-                  <div className={`text-lg font-bold mb-0.5 ${plan.popular ? 'text-ds-ink' : 'text-white'}`}>{plan.name}</div>
-                  <div className={`text-xs mb-6 ${plan.popular ? 'text-black/50' : 'text-white/40'}`}>{plan.tagline}</div>
+                  <div className={`text-lg font-bold mb-0.5 ${plan.popular ? 'text-white' : 'text-white'}`}>{plan.name}</div>
+                  <div className={`text-xs mb-6 ${plan.popular ? 'text-white/60' : 'text-white/40'}`}>{plan.tagline}</div>
 
                   {/* Data amount */}
-                  <div className={`text-[52px] font-extrabold tracking-tighter leading-none mb-1 ${plan.popular ? 'text-ds-ink' : 'text-white'}`}>
+                  <div className={`text-[52px] font-extrabold tracking-tighter leading-none mb-1 ${plan.popular ? 'text-white' : 'text-white'}`}>
                     {p.data}
                     {p.data !== '\u221e' && <span className="text-xl font-semibold tracking-normal"> GB</span>}
                   </div>
@@ -334,12 +334,12 @@ export function Home() {
 
                   {/* Price row */}
                   <div className="flex items-baseline gap-1 mb-0.5">
-                    <span className={`text-[30px] font-extrabold tracking-tight ${plan.popular ? 'text-ds-ink' : 'text-white'}`}>
+                    <span className={`text-[30px] font-extrabold tracking-tight ${plan.popular ? 'text-white' : 'text-white'}`}>
                       ${p.price}
                     </span>
-                    <span className={`text-xs font-medium ${plan.popular ? 'text-black/45' : 'text-white/40'}`}>/ plan</span>
+                    <span className={`text-xs font-medium ${plan.popular ? 'text-white/50' : 'text-white/40'}`}>/ plan</span>
                   </div>
-                  <div className={`text-xs mb-6 ${plan.popular ? 'text-black/40' : 'text-white/30'}`}>{p.validity}</div>
+                  <div className={`text-xs mb-6 ${plan.popular ? 'text-white/40' : 'text-white/30'}`}>{p.validity}</div>
 
                   {/* CTA */}
                   <a
@@ -356,8 +356,8 @@ export function Home() {
                   {/* Features */}
                   <div className="flex flex-col gap-2.5 mt-auto">
                     {plan.features.map((f) => (
-                      <div key={f} className={`flex items-center gap-2 text-xs font-medium ${plan.popular ? 'text-black/65' : 'text-white/60'}`}>
-                        <div className={`w-[18px] h-[18px] rounded-full flex items-center justify-center shrink-0 ${plan.popular ? 'bg-black/[0.12]' : 'bg-white/[0.1]'}`}>
+                      <div key={f} className={`flex items-center gap-2 text-xs font-medium ${plan.popular ? 'text-white/70' : 'text-white/60'}`}>
+                        <div className={`w-[18px] h-[18px] rounded-full flex items-center justify-center shrink-0 ${plan.popular ? 'bg-white/[0.15]' : 'bg-white/[0.1]'}`}>
                           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={plan.popular ? 'text-black/60' : 'text-white/70'}>
                             <polyline points="20 6 9 17 4 12" />
                           </svg>
