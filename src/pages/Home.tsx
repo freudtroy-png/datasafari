@@ -87,8 +87,8 @@ export function Home() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="flex-1 bg-transparent border-none px-4 sm:px-5 py-2.5 text-sm text-white outline-none placeholder:text-white/40 font-sans"
               />
-              <Button variant="primary" size="default" className="rounded-full shrink-0">
-                <Search size={14} /> <span className="hidden sm:inline">Search plans</span>
+              <Button variant="primary" size="default" className="rounded-full shrink-0 max-sm:px-3 max-sm:h-10">
+                <Search size={14} /> Search plans
               </Button>
             </div>
           </motion.div>
