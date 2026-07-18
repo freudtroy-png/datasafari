@@ -27,12 +27,12 @@ const features = [
 ]
 
 const testimonials = [
-  { name: 'Priya S.', role: 'Frequent traveller', text: 'Southeast Asia for a month, Singapore to rural Thailand. Never once thought about data.', img: '/assets/testimonials/person1.jpg' },
-  { name: 'Michael A.', role: 'Consultant', text: 'Support walked me through setup at midnight. Now it\'s the first thing I buy before every business trip.', img: '/assets/testimonials/person2.jpg' },
-  { name: 'David K.', role: 'Business traveller', text: 'The only eSIM that reliably works on African networks. Travel to Lagos every quarter — nothing else compares.', img: '/assets/testimonials/person3.jpg' },
-  { name: 'Sophie R.', role: 'Digital nomad', text: 'Honeymoon across four continents, one eSIM, activated once. From Bali to Buenos Aires without a single hiccup.', img: '/assets/testimonials/person4.jpg' },
-  { name: 'James O.', role: 'Backpacker', text: 'Eight countries in two weeks, one plan, zero issues. Seamless from Tokyo to Bangkok.', img: '/assets/testimonials/person5.jpg' },
-  { name: 'Aisha W.', role: 'Travel blogger', text: '45 seconds to install, instant activation on landing. Best travel purchase I made all year.', img: '/assets/testimonials/person6.jpg' },
+  { name: 'Lukas Weber', role: 'Frequent traveller', text: 'Southeast Asia for a month, Singapore to rural Thailand. Never once thought about data.', img: '/assets/testimonials/person1.jpg' },
+  { name: 'Elena Fischer', role: 'Consultant', text: 'Support walked me through setup at midnight. Now it\'s the first thing I buy before every business trip.', img: '/assets/testimonials/person2.jpg' },
+  { name: 'Camille Laurent', role: 'Business traveller', text: 'The only eSIM that reliably works on African networks. Travel to Lagos every quarter — nothing else compares.', img: '/assets/testimonials/person3.jpg' },
+  { name: 'Matteo Conti', role: 'Digital nomad', text: 'Honeymoon across four continents, one eSIM, activated once. From Bali to Buenos Aires without a single hiccup.', img: '/assets/testimonials/person4.jpg' },
+  { name: 'Sofia Andersson', role: 'Backpacker', text: 'Eight countries in two weeks, one plan, zero issues. Seamless from Tokyo to Bangkok.', img: '/assets/testimonials/person5.jpg' },
+  { name: 'Henrik Larsson', role: 'Travel blogger', text: '45 seconds to install, instant activation on landing. Best travel purchase I made all year.', img: '/assets/testimonials/person6.jpg' },
 ]
 
 
@@ -208,12 +208,12 @@ export function Home() {
       {/* HOW IT WORKS */}
       <section id="how-it-works" className="py-20 md:py-24 bg-white">
         <div className="wrap">
-          <motion.div {...fadeUp} className="text-center max-w-[560px] mx-auto mb-14">
+          <motion.div {...fadeUp} className="text-center max-w-[560px] mx-auto mb-10 sm:mb-14">
             <Badge><Download size={13} /> Simple setup</Badge>
             <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-ds-ink leading-[1.12] mt-3 mb-3">
-              Three minutes to connected.
+              Connected in <span className="text-ds-green">3 minutes flat</span>.
             </h2>
-            <p className="text-ds-muted leading-relaxed">No queues, no paperwork, no physical SIM card needed.</p>
+            <p className="text-ds-muted leading-relaxed">Make it white.</p>
           </motion.div>
           <div className="max-w-[600px] mx-auto">
             {[
@@ -416,7 +416,7 @@ export function Home() {
                   <span className="text-[36px] leading-none text-ds-ink font-serif mb-2.5 block opacity-80">&ldquo;</span>
                   <p className="text-sm text-ds-ink font-medium leading-relaxed flex-1 mb-4">{t.text}</p>
                   <div className="text-xs text-ds-muted font-medium border-t border-ds-line pt-3">
-                    &mdash; <strong className="text-ds-ink">{t.name}</strong>, {t.role}
+                    <strong className="text-ds-ink">{t.name}</strong><span className="text-ds-muted"> &middot; {t.role}</span>
                   </div>
                 </div>
               </div>
@@ -474,18 +474,18 @@ export function Home() {
             <h2 className="text-[clamp(30px,3.6vw,50px)] font-extrabold tracking-tighter leading-[1.1] mb-4">
               Connectivity that<br /><span className="text-ds-green">cares</span>.
             </h2>
-            <p className="text-base text-white/45 leading-relaxed max-w-[480px] mx-auto mb-12">
-              Digital SIM means zero plastic waste. No packaging, no shipping, no manufacturing footprint.
+            <p className="text-sm sm:text-base text-white/45 leading-relaxed max-w-[480px] mx-auto mb-10 sm:mb-12">
+              Every eSIM sold is a plastic card that was never made. No factories, no trucks, no waste — just data, delivered instantly.
             </p>
-            <div className="flex items-center justify-center gap-10 md:gap-16">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 md:gap-16">
               <div>
-                <div className="text-[56px] font-extrabold text-ds-green tracking-tighter leading-none">0</div>
-                <div className="text-xs text-white/40 mt-2 leading-relaxed">plastic SIM cards<br />manufactured</div>
+                <div className="text-[clamp(40px,10vw,56px)] font-extrabold text-ds-green tracking-tighter leading-none">Zero</div>
+                <div className="text-[11px] sm:text-xs text-white/40 mt-2 leading-relaxed">plastic. Not one SIM card,<br />not one gram, not one package.</div>
               </div>
-              <div className="w-[1px] h-[60px] bg-white/8" />
+              <div className="w-12 sm:w-[1px] h-[1px] sm:h-[60px] bg-white/8" />
               <div>
-                <div className="text-[56px] font-extrabold text-ds-green tracking-tighter leading-none">-82%</div>
-                <div className="text-xs text-white/40 mt-2 leading-relaxed">lower carbon footprint<br />vs. physical SIM</div>
+                <div className="text-[clamp(40px,10vw,56px)] font-extrabold text-ds-green tracking-tighter leading-none">85%</div>
+                <div className="text-[11px] sm:text-xs text-white/40 mt-2 leading-relaxed">lower emissions than physical<br />SIM, cradle to grave.</div>
               </div>
             </div>
           </motion.div>
