@@ -66,7 +66,7 @@ export function Home() {
         <div className="absolute inset-0">
           <img src="/assets/hero/plane-hero.jpg" alt="" className="w-full h-full object-cover brightness-[0.35]" />
         </div>
-        <div className="wrap relative z-10 pt-32 pb-20 text-center max-w-[720px]">
+        <div className="wrap relative z-10 pt-24 sm:pt-32 pb-20 text-center max-w-[720px]">
           <motion.div {...fadeUp}>
             <Badge variant="invert" className="mb-5">
               <Wifi size={13} /> 190+ countries
@@ -117,7 +117,7 @@ export function Home() {
       {/* TRUST BAR */}
       <section className="bg-white border-b border-ds-line py-5 overflow-hidden">
         <div className="wrap">
-          <div className="flex items-center justify-center gap-7 overflow-x-auto scrollbar-none">
+          <div className="flex items-center justify-start sm:justify-center gap-4 sm:gap-7 overflow-x-auto scrollbar-none px-4 sm:px-0">
             {[
               { icon: ThumbsUp, text: '50,000+ happy travellers' },
               { icon: Star, text: '4.9 on Trustpilot' },
@@ -211,7 +211,7 @@ export function Home() {
           <motion.div {...fadeUp} className="text-center max-w-[560px] mx-auto mb-10 sm:mb-14">
             <Badge variant="invert"><Download size={13} /> Simple setup</Badge>
             <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-white leading-[1.12] mt-3 mb-3">
-              Connected in <span className="text-ds-green">3 minutes</span><span className="text-white"> flat</span>.
+              Connected in <span className="text-ds-green">3 minutes</span><span style={{ color: '#fff' }}> flat</span>.
             </h2>
             <p className="text-white/40 leading-relaxed">No queues, no paperwork, no physical SIM card needed.</p>
           </motion.div>
@@ -225,7 +225,7 @@ export function Home() {
                 key={step.num}
                 {...fadeUp}
                 transition={{ delay: i * 0.1, duration: 0.5, ease }}
-                className="flex gap-5 py-6 border-t border-white/[0.08] first:border-t-0 first:pt-0 last:pb-0"
+                className="flex gap-3 sm:gap-5 py-5 sm:py-6 border-t border-white/[0.08] first:border-t-0 first:pt-0 last:pb-0"
               >
                 <span className="text-xs font-bold text-ds-green w-8 shrink-0 pt-0.5 tracking-wide">{step.num}</span>
                 <div>
@@ -304,7 +304,7 @@ export function Home() {
               return (
                 <div
                   key={plan.id}
-                  className={`relative flex flex-col rounded-[20px] p-7 pt-8 transition-all duration-250 ${
+                  className={`relative flex flex-col rounded-[20px] p-5 sm:p-7 pt-6 sm:pt-8 transition-all duration-250 ${
                     plan.popular
                       ? 'bg-ds-green border-ds-green shadow-[0_20px_60px_rgba(1,219,93,.25)]'
                       : 'border border-white/[0.08] hover:border-white/[0.16] hover:shadow-[0_12px_40px_rgba(0,0,0,.3)]'
@@ -322,19 +322,19 @@ export function Home() {
                   <div className={`text-xs mb-6 ${plan.popular ? 'text-white/60' : 'text-white/40'}`}>{plan.tagline}</div>
 
                   {/* Data amount */}
-                  <div className={`text-[52px] font-extrabold tracking-tighter leading-none mb-1 ${plan.popular ? 'text-white' : 'text-white'}`}>
+                  <div className={`text-[clamp(36px,10vw,52px)] font-extrabold tracking-tighter leading-none mb-1 ${plan.popular ? 'text-white' : 'text-white'}`}>
                     {p.data}
                     {p.data !== '\u221e' && <span className="text-xl font-semibold tracking-normal"> GB</span>}
                   </div>
 
                   {/* Data bar */}
-                  <div className={`h-[4px] rounded-full my-3 mb-5 overflow-hidden ${plan.popular ? 'bg-black/[0.12]' : 'bg-white/[0.12]'}`}>
-                    <div className="h-full rounded-full transition-all duration-600" style={{ width: `${p.barPct}%`, background: plan.popular ? 'rgba(0,0,0,.3)' : 'rgba(255,255,255,.4)' }} />
+                  <div className={`h-[4px] rounded-full my-3 mb-5 overflow-hidden ${plan.popular ? 'bg-white/[0.2]' : 'bg-white/[0.12]'}`}>
+                    <div className="h-full rounded-full transition-all duration-600" style={{ width: `${p.barPct}%`, background: plan.popular ? 'rgba(255,255,255,.5)' : 'rgba(255,255,255,.4)' }} />
                   </div>
 
                   {/* Price row */}
                   <div className="flex items-baseline gap-1 mb-0.5">
-                    <span className={`text-[30px] font-extrabold tracking-tight ${plan.popular ? 'text-white' : 'text-white'}`}>
+                    <span className={`text-[clamp(24px,7vw,30px)] font-extrabold tracking-tight ${plan.popular ? 'text-white' : 'text-white'}`}>
                       ${p.price}
                     </span>
                     <span className={`text-xs font-medium ${plan.popular ? 'text-white/50' : 'text-white/40'}`}>/ plan</span>
@@ -358,7 +358,7 @@ export function Home() {
                     {plan.features.map((f) => (
                       <div key={f} className={`flex items-center gap-2 text-xs font-medium ${plan.popular ? 'text-white/70' : 'text-white/60'}`}>
                         <div className={`w-[18px] h-[18px] rounded-full flex items-center justify-center shrink-0 ${plan.popular ? 'bg-white/[0.15]' : 'bg-white/[0.1]'}`}>
-                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={plan.popular ? 'text-black/60' : 'text-white/70'}>
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={plan.popular ? 'text-white/70' : 'text-white/70'}>
                             <polyline points="20 6 9 17 4 12" />
                           </svg>
                         </div>
@@ -412,7 +412,7 @@ export function Home() {
                 </div>
 
                 {/* Body */}
-                <div className="p-[18px_22px_22px] flex flex-col flex-1">
+                  <div className="p-4 sm:p-[18px_22px_22px] flex flex-col flex-1">
                   <span className="text-[36px] leading-none text-ds-ink font-serif mb-2.5 block opacity-80">&ldquo;</span>
                   <p className="text-sm text-ds-ink font-medium leading-relaxed flex-1 mb-4">{t.text}</p>
                   <div className="text-xs text-ds-muted font-medium border-t border-ds-line pt-3">
