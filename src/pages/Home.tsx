@@ -211,7 +211,7 @@ export function Home() {
           <motion.div {...fadeUp} className="text-center max-w-[560px] mx-auto mb-10 sm:mb-14">
             <Badge><Download size={13} /> Simple setup</Badge>
             <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-ds-ink leading-[1.12] mt-3 mb-3">
-              Connected in <span className="text-ds-green">3 minutes flat</span>.
+              Connected in <span className="text-ds-green">3 minutes</span><span className="text-white"> flat</span>.
             </h2>
             <p className="text-ds-muted leading-relaxed">Make it white.</p>
           </motion.div>
