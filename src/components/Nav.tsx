@@ -52,22 +52,28 @@ export function Nav() {
                 {link.label}
               </Link>
             ))}
-            {supported && (
-              <div className="relative">
-                <button
-                  onClick={() => { if (isIOS) { setShowTip(!showTip) } else { install() } }}
-                  className="inline-flex items-center justify-center gap-1.5 rounded-full text-xs font-semibold transition-all duration-200 px-3.5 h-8 bg-white/10 text-white/80 hover:bg-white/18 hover:text-white border border-white/12"
-                >
-                  <Download size={12} /> Install
-                </button>
-                {showTip && isIOS && (
-                  <div className="absolute top-full right-0 mt-2 bg-ds-ink border border-white/[0.1] rounded-xl p-3 shadow-xl w-48 text-xs text-white/60 leading-relaxed z-50">
-                    Tap Share <span className="inline-block">⎙</span> then scroll down and tap <strong className="text-white/80">Add to Home Screen</strong>.
-                    <button onClick={() => setShowTip(false)} className="block mt-2 text-ds-green text-[11px] font-semibold">Got it</button>
-                  </div>
-                )}
-              </div>
-            )}
+            <div className="relative">
+              <button
+                onClick={() => {
+                  if (isIOS) { setShowTip(!showTip); return }
+                  if (supported) { install(); return }
+                  setShowTip(!showTip)
+                }}
+                className="inline-flex items-center justify-center gap-1.5 rounded-full text-xs font-semibold transition-all duration-200 px-3.5 h-8 bg-white/10 text-white/80 hover:bg-white/18 hover:text-white border border-white/12"
+              >
+                <Download size={12} /> Install
+              </button>
+              {showTip && (
+                <div className="absolute top-full right-0 mt-2 bg-ds-ink border border-white/[0.1] rounded-xl p-3 shadow-xl w-48 text-xs text-white/60 leading-relaxed z-50">
+                  {isIOS ? (
+                    <>Tap Share <span className="inline-block">⎙</span> then scroll down and tap <strong className="text-white/80">Add to Home Screen</strong>.</>
+                  ) : !supported ? (
+                    <>Open this page in <strong className="text-white/80">Chrome</strong> to install the app.</>
+                  ) : null}
+                  <button onClick={() => setShowTip(false)} className="block mt-2 text-ds-green text-[11px] font-semibold">Got it</button>
+                </div>
+              )}
+            </div>
             <a
               href={isHome ? '#plans' : '/#plans'}
               className="inline-flex items-center justify-center gap-2 rounded-r2 text-xs font-semibold transition-all duration-200 px-[18px] h-9 bg-transparent text-white/85 border border-white/20 hover:border-white hover:text-white"
