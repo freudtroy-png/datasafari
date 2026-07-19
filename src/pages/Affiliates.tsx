@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Users, DollarSign, Globe, Gift, Percent, Rocket, BarChart3, HeadphonesIcon, CheckCircle2, ArrowRight, Star, Link2, Wallet, Zap, Shield } from 'lucide-react'
+import { Users, DollarSign, Globe, Gift, Percent, Rocket, HeadphonesIcon, CheckCircle2, ArrowRight, Star, Link2, Wallet, Zap, Shield } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
@@ -264,7 +264,7 @@ export function Affiliates() {
           </motion.div>
           <div className="space-y-2.5">
             {affiliateFAQ.map((item, i) => (
-              <AffiliateFAQItem key={i} item={item} index={i} />
+              <AffiliateFAQItem key={i} item={item} />
             ))}
           </div>
         </div>
@@ -301,7 +301,7 @@ export function Affiliates() {
   )
 }
 
-function AffiliateFAQItem({ item, index }: { item: { q: string; a: string }; index: number }) {
+function AffiliateFAQItem({ item }: { item: { q: string; a: string } }) {
   const [open, setOpen] = useState(false)
   return (
     <div className="bg-white border border-ds-line rounded-r2 overflow-hidden hover:border-ds-green/30 transition-colors">
