@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Users, DollarSign, Globe, Gift, Percent, Rocket, HeadphonesIcon, CheckCircle2, ArrowRight, Star, Link2, Wallet, Zap, Shield, TrendingUp, BarChart3, HelpCircle } from 'lucide-react'
+import { Users, DollarSign, Globe, Gift, Percent, Rocket, HeadphonesIcon, CheckCircle2, ArrowRight, Link2, Wallet, Zap, Shield, TrendingUp, HelpCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
