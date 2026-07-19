@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Download } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useInstall } from './InstallPrompt'
 
 export function Nav() {
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
+  const [showTip, setShowTip] = useState(false)
   const { pathname } = useLocation()
+  const { supported, isIOS, install } = useInstall()
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 60)
@@ -49,6 +52,22 @@ export function Nav() {
                 {link.label}
               </Link>
             ))}
+            {supported && (
+              <div className="relative">
+                <button
+                  onClick={() => { if (isIOS) { setShowTip(!showTip) } else { install() } }}
+                  className="inline-flex items-center justify-center gap-1.5 rounded-full text-xs font-semibold transition-all duration-200 px-3.5 h-8 bg-white/10 text-white/80 hover:bg-white/18 hover:text-white border border-white/12"
+                >
+                  <Download size={12} /> Install
+                </button>
+                {showTip && isIOS && (
+                  <div className="absolute top-full right-0 mt-2 bg-ds-ink border border-white/[0.1] rounded-xl p-3 shadow-xl w-48 text-xs text-white/60 leading-relaxed z-50">
+                    Tap Share <span className="inline-block">⎙</span> then scroll down and tap <strong className="text-white/80">Add to Home Screen</strong>.
+                    <button onClick={() => setShowTip(false)} className="block mt-2 text-ds-green text-[11px] font-semibold">Got it</button>
+                  </div>
+                )}
+              </div>
+            )}
             <a
               href={isHome ? '#plans' : '/#plans'}
               className="inline-flex items-center justify-center gap-2 rounded-r2 text-xs font-semibold transition-all duration-200 px-[18px] h-9 bg-transparent text-white/85 border border-white/20 hover:border-white hover:text-white"
@@ -103,6 +122,17 @@ export function Nav() {
               transition={{ delay: 0.24 }}
               className="flex flex-col gap-3 mt-2"
             >
+              {supported && (
+                <button
+                  onClick={() => {
+                    if (isIOS) { setShowTip(true); return }
+                    install(); setOpen(false)
+                  }}
+                  className="inline-flex items-center justify-center gap-2 rounded-r2 text-sm font-semibold px-7 h-11 bg-white/10 text-white border border-white/20 hover:bg-white/18"
+                >
+                  <Download size={16} /> Install app
+                </button>
+              )}
               <a
                 href={isHome ? '#plans' : '/#plans'}
                 onClick={() => setOpen(false)}

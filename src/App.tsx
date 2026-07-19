@@ -7,7 +7,7 @@ import { FAQ } from '@/pages/FAQ'
 import { Legal } from '@/pages/Legal'
 import { Affiliates } from '@/pages/Affiliates'
 import { ScrollToTop } from '@/components/ScrollToTop'
-import { InstallPrompt } from '@/components/InstallPrompt'
+
 
 export default function App() {
   return (
@@ -27,7 +27,6 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
-      <InstallPrompt />
     </BrowserRouter>
   )
 }
