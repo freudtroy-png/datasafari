@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Users, DollarSign, Globe, Gift, Percent, Rocket, HeadphonesIcon, CheckCircle2, ArrowRight, Star, Link2, Wallet, Zap, Shield } from 'lucide-react'
+import { Users, DollarSign, Globe, Gift, Percent, Rocket, HeadphonesIcon, CheckCircle2, ArrowRight, Star, Link2, Wallet, Zap, Shield, TrendingUp, BarChart3, HelpCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
@@ -55,7 +55,7 @@ const perks = [
 
 const affiliateFAQ = [
   { q: 'Who can join the affiliate programme?', a: 'Anyone with an online presence — bloggers, travel influencers, deal sites, newsletter writers, or frequent travellers who want to share DataSafari with their network.' },
-  { q: 'How are commissions calculated?', a: 'Commissions are based on the plan price before tax. If a customer buys a $20 plan, you earn $3 (15%) at Starter tier. Higher tiers earn up to 25%.' },
+  { q: 'How are commissions calculated?', a: 'Commissions are based on the plan price before tax. Higher tiers unlock better rates as your monthly volume grows.' },
   { q: 'When do I get paid?', a: 'Payouts are processed within the first 5 business days of each month for the previous month\'s earnings. Payments are sent via PayPal or bank transfer.' },
   { q: 'What counts as a referred sale?', a: 'A sale is attributed to you when a customer clicks your unique affiliate link and purchases an eSIM within 365 days. The attribution is tracked via first-click model.' },
   { q: 'Can I promote DataSafari on social media?', a: 'Absolutely. You can share your link on Instagram, TikTok, YouTube, Twitter, Facebook, or any platform. We also provide pre-made creatives to make it easy.' },
@@ -97,60 +97,38 @@ export function Affiliates() {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, ease, delay: 0.15 }} className="hidden lg:block">
-              <div className="relative">
-                <div className="w-full aspect-[4/3] rounded-[20px] border border-white/[0.08] p-8 flex flex-col justify-center" style={{ background: 'rgba(255,255,255,.03)' }}>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-full bg-ds-green/20 flex items-center justify-center"><DollarSign size={18} className="text-ds-green" /></div>
-                    <div>
-                      <div className="text-xs text-white/40">Your earnings this month</div>
-                      <div className="text-2xl font-extrabold text-white">$1,847</div>
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    {[
-                      { label: 'Clicks', value: '342', pct: 70 },
-                      { label: 'Conversions', value: '28', pct: 45 },
-                      { label: 'Commission rate', value: '20%', pct: 60 },
-                    ].map((stat) => (
-                      <div key={stat.label}>
-                        <div className="flex justify-between text-xs mb-1">
-                          <span className="text-white/40">{stat.label}</span>
-                          <span className="text-white font-semibold">{stat.value}</span>
-                        </div>
-                        <div className="h-1.5 rounded-full bg-white/[0.08] overflow-hidden">
-                          <div className="h-full rounded-full bg-ds-green transition-all" style={{ width: `${stat.pct}%` }} />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-5 pt-5 border-t border-white/[0.06] flex items-center gap-2 text-xs">
-                    <CheckCircle2 size={13} className="text-ds-green" />
-                    <span className="text-white/40">Next payout in <strong className="text-white/70">12 days</strong></span>
+              <div className="w-full aspect-[4/3] rounded-[20px] border border-white/[0.08] p-8 flex flex-col justify-center" style={{ background: 'rgba(255,255,255,.03)' }}>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-full bg-ds-green/20 flex items-center justify-center"><TrendingUp size={18} className="text-ds-green" /></div>
+                  <div>
+                    <div className="text-xs text-white/40">Commission rates</div>
+                    <div className="text-2xl font-extrabold text-white">Up to 25%</div>
                   </div>
                 </div>
-                <div className="absolute -top-3 -right-3 w-20 h-20 rounded-full bg-ds-green/10 blur-2xl" />
+                <div className="space-y-4">
+                  {[
+                    { label: 'Starter', value: '15%', desc: '0–9 sales/mo', pct: 45 },
+                    { label: 'Pro', value: '20%', desc: '10–49 sales/mo', pct: 65 },
+                    { label: 'Elite', value: '25%', desc: '50+ sales/mo', pct: 85 },
+                  ].map((tier) => (
+                    <div key={tier.label}>
+                      <div className="flex justify-between text-xs mb-1">
+                        <span className="text-white/60 font-medium">{tier.label}</span>
+                        <span className="text-ds-green font-bold">{tier.value}</span>
+                      </div>
+                      <div className="flex justify-between text-[11px] text-white/30 mb-1">{tier.desc}</div>
+                      <div className="h-1.5 rounded-full bg-white/[0.08] overflow-hidden">
+                        <div className="h-full rounded-full bg-ds-green transition-all" style={{ width: `${tier.pct}%` }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 pt-5 border-t border-white/[0.06] flex items-center gap-2 text-xs">
+                  <CheckCircle2 size={13} className="text-ds-green" />
+                  <span className="text-white/40">No cap on earnings &middot; Monthly payouts</span>
+                </div>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── STATS ─── */}
-      <section className="py-16 border-b border-ds-line">
-        <div className="wrap">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { icon: Users, value: '2,400+', label: 'Active affiliates' },
-              { icon: DollarSign, value: '$4.2M+', label: 'Paid out' },
-              { icon: Globe, value: '190+', label: 'Countries promoted' },
-              { icon: Star, value: '4.9', label: 'Affiliate rating' },
-            ].map((stat, i) => (
-              <motion.div key={stat.label} {...fadeUp(i * 0.08)}>
-                <stat.icon size={20} className="text-ds-green mx-auto mb-3" />
-                <div className="text-[clamp(24px,3vw,36px)] font-extrabold text-ds-ink tracking-tight">{stat.value}</div>
-                <div className="text-xs text-ds-muted font-medium mt-1">{stat.label}</div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
@@ -257,7 +235,7 @@ export function Affiliates() {
       <section className="py-20 md:py-24">
         <div className="wrap max-w-[700px]">
           <motion.div {...fadeUp()} className="text-center mb-12">
-            <Badge><HeadphonesIcon size={13} /> Got questions?</Badge>
+            <Badge><HelpCircle size={13} /> Got questions?</Badge>
             <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight text-ds-ink leading-[1.12] mt-3 mb-3">
               Affiliate programme FAQ.
             </h2>
@@ -281,7 +259,7 @@ export function Affiliates() {
             </div>
             <h2 className="text-[clamp(28px,3.2vw,44px)] font-extrabold tracking-tight mb-3">Ready to start earning?</h2>
             <p className="text-base text-white/45 max-w-[480px] mx-auto mb-8">
-              Join 2,400+ affiliates already earning with DataSafari. Sign up free — no commitment required.
+              Join our affiliate programme — no commitment required. Sign up free and start sharing today.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="#">
