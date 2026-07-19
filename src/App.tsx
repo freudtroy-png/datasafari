@@ -5,6 +5,7 @@ import { Home } from '@/pages/Home'
 import { HowItWorks } from '@/pages/HowItWorks'
 import { FAQ } from '@/pages/FAQ'
 import { Legal } from '@/pages/Legal'
+import { Affiliates } from '@/pages/Affiliates'
 import { ScrollToTop } from '@/components/ScrollToTop'
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/terms" element={<Legal title="Terms of Service" />} />
           <Route path="/refund" element={<Legal title="Refund Policy" />} />
           <Route path="/cookies" element={<Legal title="Cookie Policy" />} />
+          <Route path="/affiliates" element={<Affiliates />} />
         </Routes>
       </main>
       <Footer />

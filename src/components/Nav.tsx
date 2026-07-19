@@ -24,6 +24,7 @@ export function Nav() {
     { label: 'Destinations', href: isHome ? '#destinations' : '/#destinations' },
     { label: 'Plans', href: isHome ? '#plans' : '/#plans' },
     { label: 'How It Works', href: '/how-it-works' },
+    { label: 'Affiliates', href: '/affiliates' },
   ]
 
   return (
